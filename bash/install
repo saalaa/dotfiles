@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo 'source ~/.profile.local' >> ~/.profile
+echo 'source ~/.profile.local' >> ~/.bashrc
 
 ln -s `pwd`/profile.local ~/.profile.local
 
