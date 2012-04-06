@@ -1,0 +1,2 @@
+!! Bind Home to Escape and Shift-Home to tilde (ie. Bluetooth keyboard madness)
+keycode 180 = Escape asciitilde
