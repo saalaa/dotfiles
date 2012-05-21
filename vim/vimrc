@@ -1,7 +1,7 @@
 filetype plugin indent on
 
 set modeline
-set number
+"set number
 set wildmenu
 set showcmd
 set autoindent
