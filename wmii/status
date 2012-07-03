@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# This script will run every second in recent versions. As we certainly don't
+# require such a low refresh rate, let's put it to sleep.
+sleep 29
+
+inbox() {
+    value=$(grep -c '^X-Mozilla-Status: 0000' ~/.thunderbird/bjk2k39u.default/Mail/mail.almacom.co.th/Inbox)
+
+    if [ "$value" != "0" ]; then
+        echo 'inbox:' $value '|'
+    fi
+}
+
+battery() {
+    capacity=$(cat /proc/acpi/battery/BAT1/info | grep 'design capacity:' | sed 's/[^0-9]//g')
+    remaining=$(cat /proc/acpi/battery/BAT1/state | grep remaining | sed 's/[^0-9]//g')
+
+    echo 'battery:' "$((100 * $remaining / $capacity))%"
+}
+
+load() {
+    echo 'load:' $(uptime | sed 's/.*://; s/,.*//g')
+}
+
+clock() {
+    echo $(date +%Y-%m-%d\ %H:%M)
+}
+
+echo -n $(battery) '|' $(load) '|' $(clock)
