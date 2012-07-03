@@ -14,6 +14,9 @@ export PATH=$PATH:$GOROOT/bin
 # Nodejs and NPM should be in the path
 export PATH=$PATH:$HOME/vendor/node/bin
 
+# Add lein to the PATH
+export PATH=$PATH:$HOME/vendor/leiningen
+
 # Add ~/bin to the path; comes last as to not shadow any system-wide command
 export PATH=$PATH:~/bin
 
@@ -23,3 +26,7 @@ if [ "$TERM" = "screen-bce" ]; then
 else
     PS1='\[\033[01;39m\]}<(\[\033[00m\] \[\033[01;95m\]\W\[\033[00m\] \[\033[01;39m\]^>\[\033[00m\] '
 fi
+
+# I hate having all files listed so I'm basically overwritting any existing
+# alias to get rid of that
+alias ll='ls -lF'
