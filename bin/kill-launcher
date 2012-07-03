@@ -3,6 +3,9 @@
 killall unity-2d-launcher
 killall unity-2d-launcher
 killall unity-2d-launcher
+
+sleep 2
+
 killall unity-2d-launcher
 killall unity-2d-launcher
 killall unity-2d-launcher
