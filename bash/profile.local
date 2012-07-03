@@ -11,6 +11,9 @@ unset command_not_found_handle
 export GOROOT=$HOME/vendor/go
 export PATH=$PATH:$GOROOT/bin
 
+# Nodejs and NPM should be in the path
+export PATH=$PATH:$HOME/vendor/node/bin
+
 # Add ~/bin to the path; comes last as to not shadow any system-wide command
 export PATH=$PATH:~/bin
 

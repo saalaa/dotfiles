@@ -3,6 +3,15 @@
 use Sys::Hostname;
 my $host = hostname;
 
+my $RSYNC = "rsync";
+my $RSYNC_ARGS = "-auz --delete --progress";
+
+sub syslog {
+    `logger -t backup "$$ $_[0]"`;
+}
+
+# Read from the configuration file
+my $ARGS;
 my $TARGET;
 
 open(BACKUPRC, glob('~/.backuprc'))
@@ -12,21 +21,31 @@ while (<BACKUPRC>) {
     chomp;
 
     if (/^#/ || /^$/) {
-        next ;
+        next;
+    }
+
+    if (/ARGS\s*=\s*(.*)/) {
+        $ARGS = $1;
+
+        next;
     }
 
     if (/TARGET\s*=\s*(.*)/) {
         $TARGET = $1;
-        $TARGET =~ s/\${HOST}/$host/;
+        $TARGET =~ s/\${HOSTNAME}/$host/;
 
-        print $TARGET;
-        print "\n";
+        syslog("Error: $TARGET does not exist") unless -d $TARGET;
 
         next;
     }
 
     $_ =~ s/~/$ENV{HOME}/g;
 
-    `logger -t backup $_`;
-    `rsync -auz --delete --progress $_ $TARGET\n`;
+    if (-d $TARGET) {
+        syslog("Backing up $_ to $TARGET");
+
+        `$RSYNC $RSYNC_ARGS $ARGS $_ $TARGET\n`;
+    } else {
+        syslog("Skipping $_");
+    }
 }
