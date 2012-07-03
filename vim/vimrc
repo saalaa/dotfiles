@@ -82,6 +82,7 @@ syntax on
 set bg=dark
 "set bg=light
 
+"colorscheme gentooish
 "colorscheme solarized
 colorscheme badwolf
 
@@ -220,8 +221,9 @@ map <Leader>m :call TodoDoneStop()<CR>
 
 let vimclojure#NailgunClient = "/home/benoit/.vim/bin/ng"
 
+let vimclojure#ParenRainbow = 1
 let vimclojure#HighlightBuiltins = 1
-let vimclojure#WantNailgun = 1
+let vimclojure#WantNailgun = 0
 
 " }}}
 " Diff {{{
