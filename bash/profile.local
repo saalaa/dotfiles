@@ -1,0 +1,32 @@
+#!/bins/sh
+
+# I kinda really want to use vim
+export VISUAL=vim
+export EDITOR=vim
+
+# Because I hate you, little piece of disturbing and useless software..
+unset command_not_found_handle
+
+# Go variables needed for correct execution
+export GOROOT=$HOME/vendor/go
+export PATH=$PATH:$GOROOT/bin
+
+# Nodejs and NPM should be in the path
+export PATH=$PATH:$HOME/vendor/node/bin
+
+# Add lein to the PATH
+export PATH=$PATH:$HOME/vendor/leiningen
+
+# Add ~/bin to the path; comes last as to not shadow any system-wide command
+export PATH=$PATH:~/bin
+
+# Yeah, you've got to love fancy prompts
+if [ "$TERM" = "screen-bce" ]; then
+    PS1='\[\033[01;31m\]}<(\[\033[00m\] \[\033[00;39m\]\w\[\033[00m\] \[\033[01;31m\]^>\[\033[00m\] '
+else
+    PS1='\[\033[01;39m\]}<(\[\033[00m\] \[\033[01;95m\]\W\[\033[00m\] \[\033[01;39m\]^>\[\033[00m\] '
+fi
+
+# I hate having all files listed so I'm basically overwritting any existing
+# alias to get rid of that
+alias ll='ls -lF'
