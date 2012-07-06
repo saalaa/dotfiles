@@ -1,4 +1,4 @@
-#!/bin/dash -f
+#!/bin/sh
 
 MODKEY=Mod1
 
@@ -8,16 +8,21 @@ export WMII_FOCUSCOLORS='#ffffff #222222 #222222'
 export WMII_BACKGROUND='#333333'
 export WMII_FONT='Ubuntu Mono'
 
+export TRAYER_TINT='0x222222'
+
 wmiir write /tagrules <<!
+/Firefox.*/ -> 1
+/Skype.*/ -> 6
+/Pidgin.*/ -> 6
 /trayer.*/ -> 6
 /MPlayer.*/ -> ~
+/Gimp.*/ -> gimp
 /.*/ -> sel
 /.*/ -> 1
 !
 
 wmiir write /colrules <<!
 /gimp/ -> 17+83+41
-/.*/ -> 50+50
 !
 
 ~/.wmii/autostart &
