@@ -131,7 +131,8 @@ function! TogglePythonBreakpoint()
     if line =~ "pdb"
         exec "normal dd"
     else
-        exec "normal Oimport pdb; pdb.set_trace()"
+        "exec "normal Oimport pdb; pdb.set_trace()"
+        exec "normal Oimport rpdb2; rpdb2.start_embedded_debugger('1234')"
         exec "normal ^"
     endif
 endfunction
@@ -145,11 +146,15 @@ au BufNewFile,BufRead *.py setlocal tabstop=4
 au BufNewFile,BufRead *.py setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"',\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 
+" Print all the top-most classes found in the current file
 au BufNewFile,BufRead *.py nmap <F2> :g/^class/p<CR>
+
+" Run the current script, ideally, I'd like something a little more clever and
+" posibly outisde of VIM for large projects
 au BufNewFile,BufRead *.py nmap <F5> :!python %<CR>
 
-"au BufNewFile,BufRead *.py nmap <F9> :call TogglePythonBreakpoint()<CR>
-au BufNewFile,BufRead *.py nmap <Leader>9 :call TogglePythonBreakpoint()<CR>
+" Toggle a breakpoint
+au BufNewFile,BufRead *.py nmap <F9> :call TogglePythonBreakpoint()<CR>
 
 
 au BufNewFile,BufRead *.py hi Folded ctermbg=none ctermfg=237
