@@ -20,4 +20,8 @@ wmiir write /colrules <<!
 /.*/ -> 50+50
 !
 
+status() {
+    . ~/.wmii/status
+}
+
 ~/.wmii/autostart &
