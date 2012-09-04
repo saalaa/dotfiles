@@ -1,6 +1,8 @@
 #!/bin/sh
 
-MODKEY=Mod1
+export MODKEY=Mod1
+
+export WMII_TERM=gnome-terminal
 
 export WMII_NORMCOLORS='#888888 #222222 #222222'
 export WMII_FOCUSCOLORS='#ffffff #222222 #222222'
@@ -23,6 +25,7 @@ wmiir write /tagrules <<!
 
 wmiir write /colrules <<!
 /gimp/ -> 17+83+41
+/2/ -> 60+40
 !
 
 status() {
