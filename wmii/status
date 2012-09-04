@@ -9,8 +9,8 @@ inbox() {
 }
 
 battery() {
-    capacity=$(cat /proc/acpi/battery/BAT1/info | grep 'design capacity:' | sed 's/[^0-9]//g')
-    remaining=$(cat /proc/acpi/battery/BAT1/state | grep remaining | sed 's/[^0-9]//g')
+    capacity=$(cat  /sys/class/power_supply/BAT1/energy_full)
+    remaining=$(cat /sys/class/power_supply/BAT1/energy_now)
 
     echo 'battery:' "$((100 * $remaining / $capacity))%"
 }
