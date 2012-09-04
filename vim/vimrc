@@ -13,6 +13,7 @@ set si
 set et
 set sj=-30
 
+
 set formatoptions+=r
 set formatoptions+=o
 
@@ -76,7 +77,6 @@ if ! has("gui_running")
     set t_Co=256 
 endif 
 
-
 syntax on
 
 set bg=dark
@@ -84,9 +84,10 @@ set bg=dark
 
 "colorscheme gentooish
 "colorscheme solarized
-colorscheme badwolf
+"colorscheme badwolf
+colorscheme saalaa
 
-set cursorline
+"set cursorline
 
 hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None
 
@@ -110,6 +111,10 @@ inoremap kj <ESC>
 nnoremap <F3> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 " }}}
+
+function! SendToREPL()
+    call system("~/bin/send-to-repl", getreg("\""))
+endfunction
 
 " Coffee Script {{{
 
@@ -157,6 +162,8 @@ au BufNewFile,BufRead *.py nmap <F5> :!python %<CR>
 " Toggle a breakpoint
 au BufNewFile,BufRead *.py nmap <F9> :call TogglePythonBreakpoint()<CR>
 
+" Send the selection to the REPL
+au BufNewFile,BufRead *.py map <Leader>m :call SendToREPL()<CR>
 
 au BufNewFile,BufRead *.py hi Folded ctermbg=none ctermfg=237
 
@@ -217,9 +224,7 @@ au BufNewFile,BufRead *.notes setlocal fdt=
 au BufNewFile,BufRead *.notes setlocal fdn=2
 au BufNewFile,BufRead *.notes setlocal fml=1
 
-map <Leader>m :call TodoDoneStop()<CR>
-
-"au BufNewFile,BufRead *.notes setlocal fdm=marker
+au BufNewFile,BufRead *.notes map <Leader>m :call TodoDoneStop()<CR>
 
 " }}}
 " Clojure {{{
@@ -229,6 +234,9 @@ let vimclojure#NailgunClient = "/home/benoit/.vim/bin/ng"
 let vimclojure#ParenRainbow = 1
 let vimclojure#HighlightBuiltins = 1
 let vimclojure#WantNailgun = 0
+
+" Send the selection to the REPL
+au BufNewFile,BufRead *.clj map <Leader>m :call SendToREPL()<CR>
 
 " }}}
 " Diff {{{
