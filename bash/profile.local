@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# I kinda really want to use vim
+export VISUAL=vim
+export EDITOR=vim
+
+# Because I hate you, little piece of disturbing and useless software..
+unset command_not_found_handle
+
+# Python Google App Engine root directory
+export PY_GAE_ROOT=/home/benoit/vendor/gae-py/
+
+# Go variables needed for correct execution
+export GOROOT=$HOME/vendor/go
+export PATH=$PATH:$GOROOT/bin
+
+# Nodejs and NPM should be in the path
+export PATH=$PATH:$HOME/vendor/node/bin
+export PATH=$PATH:$HOME/vendor/leiningen
+export PATH=$PATH:$HOME/vendor/iReport-3.7.6/bin
+
+export PATH=$PATH:./node_modules/.bin
+
+# Add ~/bin to the path; comes last as to not shadow any system-wide command
+export PATH=$PATH:~/bin
+
+function make_ps1
+{
+    exit_status=`echo $1`
+    process_count=`ps | grep bash | wc -l`
+
+    echo -en "\[\033[31m\033[47m\]$exit_status\[\033[00m\] "
+
+    IFS=$'\n'
+    hg_info=( `hg summary 2> /dev/null` )
+
+    if [ $? -eq 0 ]; then
+        echo -en "\[\033[1;33m\033[40m\]${hg_info[2]:8}\[\033[00m\]"
+
+        changes=`hg status 2> /dev/null | wc -l`
+
+        [[ $changes -gt 0 ]] \
+            && echo -en "\[\033[31m\033[47m\]!\[\033[00m\]"
+
+        echo -n " "
+    fi
+
+    unset IFS
+
+    # Show a plus sign to indicate that we're in a nested shell
+    [[ $process_count -gt 3 ]] \
+        && echo -en "\[\033[1m\033[40m\]+\[\033[00m\]"
+
+    # Current directory and prompt
+    echo -en "\[\033[1;33m\033[40m\]\W\[\033[00m\] % "
+}
+
+function ps1_exit
+{
+    [[ $1 -ne 0 ]] && echo -n "$1"
+}
+
+function ps1_vcs_branch
+{
+    branch=`hg branch 2>/dev/null`
+
+    if [ $? -eq 0 ]; then
+        if [ "$branch" != "default" ]; then
+            echo -n "$branch:"
+        fi
+    fi
+}
+
+function ps1_vcs_changes
+{
+    if hg branch >/dev/null 2>&1; then
+        if hg summary | grep -q '^commit: (clean)$'; then
+            echo -n "="
+        else
+            echo -n "+"
+        fi
+    fi
+}
+
+function ps1_nesting
+{
+    nesting=$((`ps | grep bash | wc -l` - 3))
+
+    if [ "$nesting" -gt "0" ]; then
+        echo -n $nesting
+    fi
+}
+
+function hg_branch
+{
+    hg branch 2>/dev/null
+}
+
+
+PROMPT_COMMAND='exit=`ps1_exit $?` branch=`hg_branch`'
+
+PS1='\[\033[31m\033[47m\]$exit\[\033[00m\]\[\033[1;33m\033[40m\]\W\[\033[00m\] \[\033[31m\033[10m\]$branch\[\033[00m\]\[\033[1m\033[40m\]`ps1_nesting`\[\033[00m\]% '
+
+# Colors, please
+alias ls='ls --color=auto'
+
+alias ll='ls -lh'
+alias l='ls -ogh'
+
+export TZ=Asia/Bangkok

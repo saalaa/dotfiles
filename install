@@ -1,0 +1,39 @@
+#!/bin/sh
+
+TODO=
+ERROR=
+
+if [ "x$1x" = "xx" ]; then
+    ERROR="Missing argument\nUsage: $0 ITEM|all"
+elif [ "$1" = "all" ]; then
+    for directory in *; do
+        if [ -d "$directory" ]; then
+            if [ -x "$directory/install" ]; then
+                TODO="$directory $TODO"
+            fi
+        fi
+    done
+else
+    TODO=$1
+fi
+
+for item in $TODO; do
+    if [ -d "$item" ]; then
+        if [ -x "$item/install" ]; then
+            echo "Installing $item"
+            (cd $item; ./install)
+        else
+            ERROR="$item is not a installable"
+            break
+        fi
+    else
+        ERROR="$item is not a directory"
+        break
+    fi
+done
+
+if [ "$ERROR" != "" ]; then
+    echo "Error: $ERROR"
+    exit 1
+fi
+

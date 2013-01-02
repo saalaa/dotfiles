@@ -1,0 +1,7 @@
+[ui]
+username = Benoit Myard <benoit@saalaa.net>
+
+[hooks]
+#pretxncommit.pep8 = python:hghooks.code.pep8hook
+#pretxncommit.pyflakes = python:hghooks.code.pyflakeshook
+#pretxncommit.pdb = python:hghooks.code.pdbhook
