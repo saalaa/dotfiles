@@ -7,16 +7,21 @@ export EDITOR=vim
 # Because I hate you, little piece of disturbing and useless software..
 unset command_not_found_handle
 
+# Python Google App Engine root directory
+export PY_GAE_ROOT=/home/benoit/vendor/gae-py/
+
 # Go variables needed for correct execution
 export GOROOT=$HOME/vendor/go
 export PATH=$PATH:$GOROOT/bin
 
+# Nodejs and NPM should be in the path
 export PATH=$PATH:$HOME/vendor/node/bin
 export PATH=$PATH:$HOME/vendor/leiningen
 export PATH=$PATH:$HOME/vendor/iReport-3.7.6/bin
 
 export PATH=$PATH:./node_modules/.bin
 
+# Add ~/bin to the path; comes last as to not shadow any system-wide command
 export PATH=$PATH:~/bin
 
 function make_ps1
@@ -86,10 +91,15 @@ function ps1_nesting
     fi
 }
 
+function hg_branch
+{
+    hg branch 2>/dev/null
+}
 
-PROMPT_COMMAND='exit=`ps1_exit $?`'
 
-PS1='\[\033[31m\033[47m\]$exit\[\033[00m\]\[\033[1;33m\033[40m\]\W\[\033[00m\] \[\033[1m\033[40m\]`ps1_nesting`\[\033[00m\]% '
+PROMPT_COMMAND='exit=`ps1_exit $?` branch=`hg_branch`'
+
+PS1='\[\033[31m\033[47m\]$exit\[\033[00m\]\[\033[1;33m\033[40m\]\W\[\033[00m\] \[\033[31m\033[10m\]$branch\[\033[00m\]\[\033[1m\033[40m\]`ps1_nesting`\[\033[00m\]% '
 
 # Colors, please
 alias ls='ls --color=auto'
