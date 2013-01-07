@@ -2,6 +2,10 @@
 # Init file for fish
 #
 
+# The hg-prompt command can be found at https://bitbucket.org/sjl/hg-prompt
+
+set fish_greeting ""
+
 function fish_prompt
     set_color -ob black yellow
     echo -n (pwd|sed 's/.*.\///')
