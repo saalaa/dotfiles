@@ -93,7 +93,7 @@ function ps1_nesting
 
 function hg_branch
 {
-    hg branch 2>/dev/null
+    hg prompt '{status}{branch}' 2>/dev/null
 }
 
 
