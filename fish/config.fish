@@ -13,8 +13,16 @@ function fish_prompt
     set_color normal
     echo -n ' '
 
-    set_color red
-    hg prompt '{status}{branch}' 2>/dev/null
+    set branch (hg branch 2>/dev/null)
+
+    if test "$branch" = "dev"
+        echo -n '-- THIS IS NOT THE BRANCH YOU ARE LOOKING FOR -- '
+        set_color red
+        hg prompt '{status}{branch}' 2>/dev/null
+    else
+        set_color red
+        hg prompt '{status}{branch}' 2>/dev/null
+    end
 
     set_color normal
     echo '% '
