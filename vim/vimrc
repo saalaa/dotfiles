@@ -80,14 +80,8 @@ endif
 syntax on
 
 set bg=dark
-"set bg=light
 
-"colorscheme gentooish
-"colorscheme solarized
-"colorscheme badwolf
-colorscheme saalaa
-
-"set cursorline
+colorscheme tomorrow-night
 
 hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None
 
@@ -97,7 +91,6 @@ hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None
 
 set foldcolumn=0
 set fml=0
-set fillchars="vert: ,fold: "
 
 " }}}
 " Key Bindings {{{
@@ -137,8 +130,8 @@ function! TogglePythonBreakpoint()
     if line =~ "pdb"
         exec "normal dd"
     else
-        "exec "normal Oimport pdb; pdb.set_trace()"
-        exec "normal Oimport rpdb2; rpdb2.start_embedded_debugger('1234')"
+        exec "normal Oimport pdb; pdb.set_trace()"
+        "exec "normal Oimport rpdb2; rpdb2.start_embedded_debugger('1234')"
         exec "normal ^"
     endif
 endfunction
@@ -165,7 +158,8 @@ au BufNewFile,BufRead *.py nmap <F9> :call TogglePythonBreakpoint()<CR>
 " Send the selection to the REPL
 au BufNewFile,BufRead *.py map <Leader>m :call SendToREPL()<CR>
 
-au BufNewFile,BufRead *.py hi Folded ctermbg=none ctermfg=237
+" Improve folds rendering, depends on the theme
+"au BufNewFile,BufRead *.py hi Folded ctermbg=none ctermfg=237
 
 "au BufNewFile,BufRead *.py setlocal fde=PythonSimpleFold()
 "au BufNewFile,BufRead *.py set foldmethod=indent foldnestmax=1
