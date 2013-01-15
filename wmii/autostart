@@ -5,9 +5,12 @@ trayer --expand true --transparent true --alpha 0 --tint $TRAYER_TINT \
 
 # Programs below should always be present
 
-gnome-settings-daemon &
+gnome-settings-daemon 2>/dev/null &
+/usr/lib/gnome-settings-daemon/gnome-settings-daemon 2>/dev/null &
+
 nm-applet &
 system-config-printer-applet &
+
 
 # Depending on the version of Gnome, let's start a bunch of tools
 
