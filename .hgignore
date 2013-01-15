@@ -1,0 +1,7 @@
+syntax: glob
+
+**.swp
+
+vim/vim/.netrwhist
+wmii/history.actions
+wmii/history.progs
