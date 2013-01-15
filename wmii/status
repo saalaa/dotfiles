@@ -23,7 +23,11 @@ clock() {
     echo $(date +%Y-%m-%d\ %H:%M)
 }
 
-echo -n $(battery) '|' $(load) '|' $(clock)
+wlan0() {
+    echo wlan0: $(iwconfig wlan0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%.0f%%", $1/$2*100)}') $(iwconfig wlan0 | grep ESSID | awk -F'"' '{ print $2 }') $(ifconfig wlan0 | grep inet\\b | awk '{ print $2}')
+}
+
+echo -n $(wlan0) '|' $(battery) '|' $(load) '|' $(clock)
 
 # This script will run every second in recent versions. As we certainly don't
 # require such a low refresh rate, let's put it to sleep.
