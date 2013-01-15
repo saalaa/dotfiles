@@ -14,7 +14,7 @@ servers = (
 chatnets = {
   freenode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify PASSWORD; /wait 3000; /join #gcu; /join #openbsd; /join #freebsd; /join #openerp; /join #mongodb; /join #clojure; /join #archlinux; /join #go-nuts";
+    autosendcmd = "/msg nickserv identify PASSWORD; /wait 3000; /join #openbsd; /join #mongodb; /join #clojure; /join #archlinux; /join #go-nuts; /join #python; /join #gcu";
   };
 };
 
