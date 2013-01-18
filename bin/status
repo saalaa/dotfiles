@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo
+
+free -m | sed 's/^/    /'
+echo
+
+df -h | grep '^[/F]' | sed 's/^/    /'
+echo
+
+svstat ~/daemons/* | sed 's/^/    /'
+echo
+

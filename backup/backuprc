@@ -1,0 +1,42 @@
+# vim: syntax=sh
+
+# Configuration for the Perl script `backup.pl` found in bin that makes backups
+# using RSync.
+
+# Keep backup files
+ARGS=-b
+
+# Dotfiles should be kept separate on a per-host basis.
+
+TARGET=/media/Pirate/backup/dotfiles/${HOSTNAME}
+~/.vimrc
+~/.gvimrc
+~/.vim
+~/.wmii
+~/.bash
+~/.bashrc
+~/.profile
+~/.backuprc
+~/.ssh
+~/.hgignore
+~/.hgrc
+~/.irssi
+~/.screenrc
+~/.tmux.conf
+~/.bin
+~/.Xmodmap
+
+# Documents and SSH Keys can be put together as they either don't mix or mix
+# correctly.
+
+# No backup files needed
+ARGS=
+
+TARGET=/media/Pirate/backup/
+~/private
+~/Documents
+~/src
+~/gocode
+
+TARGET=/media/Pirate/ssh-keys
+~/.ssh/*.pem
