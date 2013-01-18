@@ -1,0 +1,67 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
+
+filetype plugin indent on
+syntax on
+
+set modeline
+set number
+set wildmenu
+set showcmd
+set autoindent
+set hlsearch
+set incsearch
+set sts=4
+set sw=4
+set si
+set et
+set sj=-30
+
+set foldcolumn=0
+set fml=0
+
+set formatoptions+=r
+set formatoptions+=o
+
+let mapleader = ","
+
+if ! has("gui_running") 
+    set t_Co=256 
+endif 
+
+set bg=dark
+
+colorscheme tomorrow-night-bright
+
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+vmap <C-k> xkP`[V`]
+vmap <C-j> xp`[V`]
+inoremap kj <ESC>
+
+nnoremap <F3> :set nonumber!<CR>:set nopaste!<CR>
+
+
+" Bundles settings -----------------------------------------------------------
+
+" Settings for ctrlp.vim
+set wildignore+=*/lib/*,*.so,*.swp,*.zip,*.png,*.gif,*.pyc
+
+let g:ctrlp_extensions = ['funky']
+let g:ctrlp_prompt_mappings = {
+\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+\ 'PrtHistory(-1)':       ['<c-n>'],
+\ 'PrtHistory(1)':        ['<c-p>'],
+\ 'ToggleFocus()':        ['<c-tab>'],
+\ }
+
+
+" Settings for vim-flake8
+autocmd BufWritePost *.py call Flake8()
+
+" Settings for Ack
+nmap <c-f> :Ack<space>
