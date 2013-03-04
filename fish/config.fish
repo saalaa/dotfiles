@@ -32,7 +32,7 @@ set -x EDITOR vim
 set -x VISUAL vim
 
 # Python Google App Engine root directory
-set -x PY_GAE_ROOT /home/benoit/vendor/gae-py/
+set -x PY_GAE_ROOT /home/benoit/vendor/gae-py
 
 # Go variables needed for correct execution
 set -x GOROOT $HOME/vendor/go
