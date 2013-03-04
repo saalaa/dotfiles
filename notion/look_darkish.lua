@@ -27,7 +27,7 @@ de.defstyle("*", {
 
 de.defstyle("frame", {
     based_on = "*",
-    spacing = 2,
+    spacing = 0,
 })
 
 de.defstyle("frame-floating", {
@@ -58,8 +58,8 @@ de.defstyle("tabstyle", {
 
 de.defstyle("tab", {
     based_on = "tabstyle",
-    spacing = 2,
-    padding_pixels = 1,
+    spacing = 0,
+    padding_pixels = 3,
 })
 
 de.defstyle("tab-menuentry", {
