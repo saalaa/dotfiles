@@ -26,13 +26,18 @@ set formatoptions+=o
 
 let mapleader = ","
 
-if ! has("gui_running") 
-    set t_Co=256 
-endif 
+
+" Theme configuration and tweaking
+
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
 
 set bg=dark
 
-colorscheme tomorrow-night-bright
+"colorscheme vydark
+colorscheme badwolf
+hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None
 
 
 nnoremap n nzzzv
@@ -44,6 +49,41 @@ inoremap kj <ESC>
 
 nnoremap <F3> :set nonumber!<CR>:set nopaste!<CR>
 
+
+" Python stuff
+
+function! TogglePythonBreakpoint(type)
+    let lineno = line(".")
+    let line = getline(lineno)
+
+    if line =~ "__import__"
+        exec "normal dd"
+    else
+        if a:type =~ "rpdb2"
+            exec "normal O__import__('rpdb2').start_embedded_debugger('1234')"
+        elseif a:type =~ "pdb"
+            exec "normal O__import__('pdb').set_trace()"
+        elseif a:type =~ "logging"
+            exec "normal O__import__('logging').info(\"XXX\")"
+        endif
+
+        exec "normal ^"
+    endif
+endfunction
+
+au BufNewFile,BufRead *.py setlocal fdm=indent
+au BufNewFile,BufRead *.py setlocal fdi=
+au BufNewFile,BufRead *.py setlocal fdt=
+au BufNewFile,BufRead *.py setlocal fdn=2
+au BufNewFile,BufRead *.py setlocal tabstop=4
+
+au BufNewFile,BufRead *.py noremap <F8> :call TogglePythonBreakpoint('logging')<CR>
+au BufNewFile,BufRead *.py noremap <F9> :call TogglePythonBreakpoint('pdb')<CR>
+au BufNewFile,BufRead *.py noremap <F10> :call TogglePythonBreakpoint('rpdb2')<CR>
+
+au BufNewFile,BufRead *.py noremap <Leader>d :call TogglePythonBreakpoint('pdb')<CR>
+
+autocmd BufWritePost ~/.vim/doc/* :helptags ~/.vim/doc
 
 " Bundles settings -----------------------------------------------------------
 
@@ -64,4 +104,10 @@ let g:ctrlp_prompt_mappings = {
 autocmd BufWritePost *.py call Flake8()
 
 " Settings for Ack
-nmap <c-f> :Ack<space>
+nmap <c-j> :Ack<space>
+
+" Shortcut for NerdeCommenter
+vmap <c-c> :call NERDComment('x', 'Toggle')<CR>
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set laststatus=2
