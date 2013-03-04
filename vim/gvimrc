@@ -1,6 +1,7 @@
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-set guioptions-=m
 
 set nowrap
+
+set guifont=Droid\ Sans\ Mono\ 11
