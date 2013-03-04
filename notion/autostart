@@ -1,0 +1,37 @@
+#!/bin/sh
+
+docker &
+
+
+# Programs below should always be present
+
+/usr/lib/gnome-settings-daemon/gnome-settings-daemon 2>/dev/null &
+
+which nm-applet > /dev/null \
+    && nm-applet &
+
+which system-config-printer-applet > /dev/null \
+    && system-config-printer-applet &
+
+
+# Depending on the version of Gnome, let's start a bunch of tools
+
+which gnome-power-manager > /dev/null \
+    && gnome-power-manager &
+
+which gnome-volume-control-applet > /dev/null \
+    && gnome-volume-control-applet &
+
+which gnome-sound-applet > /dev/null \
+    && gnome-sound-applet &
+
+
+# Start the Keyring daemon because it's friendly
+
+export `gnome-keyring-daemon`
+
+
+# Start pidgin
+
+which pidgin > /dev/null \
+    && pidgin &
