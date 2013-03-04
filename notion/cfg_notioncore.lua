@@ -137,11 +137,11 @@ defbindings("WMPlex.toplevel", {
     bdoc("Toggle tag of current object."),
     kpress(META.."T", "WRegion.set_tagged(_sub, 'toggle')", "_sub:non-nil"),
 
-    bdoc("Query for manual page to be displayed."),
-    kpress(ALTMETA.."F1", "mod_query.query_man(_, ':man')"),
+    --bdoc("Query for manual page to be displayed."),
+    --kpress(ALTMETA.."F1", "mod_query.query_man(_, ':man')"),
 
-    bdoc("Show the Notion manual page."),
-    kpress(META.."F1", "ioncore.exec_on(_, ':man notion')"),
+    --bdoc("Show the Notion manual page."),
+    --kpress(META.."F1", "ioncore.exec_on(_, ':man notion')"),
 
     bdoc("Run a terminal emulator."),
     kpress(ALTMETA.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
@@ -152,16 +152,16 @@ defbindings("WMPlex.toplevel", {
     bdoc("Query for Lua code to execute."),
     kpress(META.."F3", "mod_query.query_lua(_)"),
 
-    bdoc("Query for host to connect to with SSH."),
-    kpress(ALTMETA.."F4", "mod_query.query_ssh(_, ':ssh')"),
+    --bdoc("Query for host to connect to with SSH."),
+    --kpress(ALTMETA.."F4", "mod_query.query_ssh(_, ':ssh')"),
 
-    bdoc("Query for file to edit."),
-    kpress(ALTMETA.."F5", 
-           "mod_query.query_editfile(_, 'run-mailcap --action=edit')"),
+    --bdoc("Query for file to edit."),
+    --kpress(ALTMETA.."F5", 
+           --"mod_query.query_editfile(_, 'run-mailcap --action=edit')"),
 
-    bdoc("Query for file to view."),
-    kpress(ALTMETA.."F6", 
-           "mod_query.query_runfile(_, 'run-mailcap --action=view')"),
+    --bdoc("Query for file to view."),
+    --kpress(ALTMETA.."F6", 
+           --"mod_query.query_runfile(_, 'run-mailcap --action=view')"),
 
     bdoc("Query for workspace to go to or create a new one."),
     kpress(ALTMETA.."F9", "mod_query.query_workspace(_)"),
