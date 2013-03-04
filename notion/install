@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p ~/.notion
+
+ln -s `pwd` ~/.notion/default-session--0

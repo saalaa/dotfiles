@@ -21,6 +21,8 @@ export PATH=$PATH:$HOME/vendor/iReport-3.7.6/bin
 
 export PATH=$PATH:./node_modules/.bin
 
+export PATH=$PATH:~/.vim/bundle/powerline/scripts
+
 # Add ~/bin to the path; comes last as to not shadow any system-wide command
 export PATH=$PATH:~/bin
 
