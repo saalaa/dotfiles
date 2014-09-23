@@ -10,6 +10,28 @@ WMII_FOCUSCOLORS='#ffffff #222222 #222222'
 WMII_BACKGROUND='#333333'
 WMII_FONT='Ubuntu Mono'
 
+
+# Local Keybindings
+# -----------------
+
+wi_events <<!
+Key Control-Alt-l # Lock screen
+  ~/.wmii/slock
+Key XF86AudioMute
+  amixer set Master toggle
+Key XF86AudioRaiseVolume
+  amixer set Master 1%+ unmute
+Key XF86AudioLowerVolume
+  amixer set Master 1%- unmute
+Key XF86AudioNext
+  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null
+Key XF86AudioPrev
+  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous > /dev/null
+Key XF86AudioPlay
+  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause > /dev/null
+!
+
+
 # Status bar
 # ----------
 
@@ -31,6 +53,7 @@ clock() {
 status() {
     echo -n label $(battery) '|' $(load) '|' $(clock)
 }
+
 
 # Startup applications
 # --------------------
