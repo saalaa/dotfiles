@@ -1,12 +1,12 @@
 # THIS SECTION DEALS WITH THE SERVERS YOU CONNECT TO
 
 servers = (
-    {
-        address = "irc.freenode.net";
-        chatnet = "freenode";
-        port = "6667";
-        autoconnect = "yes";
-    }
+  {
+    address = "irc.freenode.net";
+    chatnet = "freenode";
+    port = "6667";
+    autoconnect = "yes";
+  }
 );
 
 # THIS SECTION DEALS WITH THE COMMANDS THAT ARE SENT WHEN YOU JOIN A SERVER
@@ -14,7 +14,7 @@ servers = (
 chatnets = {
   freenode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify PASSWORD; /wait 3000; /join #openbsd; /join #mongodb; /join #clojure; /join #archlinux; /join #go-nuts; /join #python; /join #gcu";
+    autosendcmd = "/msg nickserv identify PASSWORD; /wait 5000";
   };
 };
 
@@ -22,14 +22,13 @@ chatnets = {
 # THIS SECTION DEALS WITH THE CHANNELS THAT YOU WANT TO JOIN ON CONNECT
 
 channels = (
-  { name = "#freebsd";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#openbsd";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#gcu";       chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#openerp";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#mongodb";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#clojure";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#go-nuts";   chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#openbsd";      chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#mongodb";      chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#clojure";      chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#go-nuts";      chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#putaindecode"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#putaindechat"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#archlinux";    chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -199,7 +198,8 @@ settings = {
     real_name = "Benoit";
     user_name = "benoit";
     nick = "saalaa__";
-    recode_out_default_charset  = "utf-8";
+    recode_out_default_charset = "utf-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
+hilights = ( { text = "Nicolab "; nick = "yes"; word = "yes"; } );
