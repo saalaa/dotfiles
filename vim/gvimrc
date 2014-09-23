@@ -1,6 +1,23 @@
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
-set guioptions-=m
+colorscheme base16-ocean
 
-set nowrap
+" Remove menubar and toolbar on GNU/Linux
+if has("gui_gtk2")
+  set guioptions-=m
+  set guioptions-=T
+end
+
+" Remove scrollbars
+set guioptions-=L
+set guioptions-=r
+
+" Cross-platform typography
+if has("gui_gtk2")
+    set guifont=Droid\ Sans\ Mono\ 13
+elseif has("gui_macvim")
+    set guifont=Droid\ Sans\ Mono:h13
+elseif has("gui_win32")
+    set guifont=Droid\ Sans\ Mono:h13
+end
+
+" Highlight eol, etc..
+hi SpecialKey guifg=white guibg=gray

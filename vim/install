@@ -1,6 +1,8 @@
 #!/bin/sh
 
-ln -s `pwd`/vim    ~/.vim
 ln -s `pwd`/vimrc  ~/.vimrc
 ln -s `pwd`/gvimrc ~/.gvimrc
 
+mkdir ~/.vim ~/.vim/bundle
+
+ln -s `pwd`/fetch-bundles ~/.vim/fetch-bundles
