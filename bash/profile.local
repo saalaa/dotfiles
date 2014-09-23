@@ -107,4 +107,6 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias l='ls -ogh'
 
-export TZ=Asia/Bangkok
+export TZ=Europe/Paris
+
+export HISTCONTROL=ignoreboth
