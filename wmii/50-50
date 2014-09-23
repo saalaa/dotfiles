@@ -1,8 +1,0 @@
-#!/bin/sh
-
-wmiir write /colrules <<!
-/gimp/ -> 17+83+41
-// -> 50+50
-!
-
-echo '*50-50*' | wmiir create /rbar/col
