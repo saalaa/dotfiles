@@ -1,0 +1,49 @@
+#!/bin/sh
+
+MODKEY=Mod1
+
+WMII_TERM=gnome-terminal
+
+WMII_NORMCOLORS='#888888 #222222 #222222'
+WMII_FOCUSCOLORS='#ffffff #222222 #222222'
+
+WMII_BACKGROUND='#333333'
+WMII_FONT='Ubuntu Mono'
+
+# Status bar
+# ----------
+
+battery() {
+    capacity=$(cat  /sys/class/power_supply/BAT1/energy_full)
+    remaining=$(cat /sys/class/power_supply/BAT1/energy_now)
+
+    echo "$((100 * $remaining / $capacity))%"
+}
+
+load() {
+    echo $(uptime | sed 's/.*://; s/,.*//g')
+}
+
+clock() {
+    echo $(date +%a\ %Y-%m-%d\ %H:%M:%S)
+}
+
+status() {
+    echo -n label $(battery) '|' $(load) '|' $(clock)
+}
+
+# Startup applications
+# --------------------
+
+run_if_exists() {
+    which $1 > /dev/null && $1 &
+}
+
+run_if_exists gnome-settings-daemon
+run_if_exists gnome-power-manager
+run_if_exists nm-applet
+run_if_exists system-config-printer-applet
+run_if_exists gnome-sound-applet
+run_if_exists gnome-volume-control-applet
+
+export `gnome-keyring-daemon`

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+SESSION=xxx
+
+cd ~/src
+
+
+tmux new-session -d -s $SESSION
+
+
+tmux new-window -t $SESSION
+
+
+tmux new-window -t $SESSION
+
+tmux move-window -s $SESSION -t $SESSION:98
+tmux rename-window -t $SESSION:98 irssi
+
+
+tmux new-window -t $SESSION
+
+tmux move-window -s $SESSION -t $SESSION:99
+tmux rename-window -t $SESSION:99 music
+
+
+tmux select-window -t $SESSION:0

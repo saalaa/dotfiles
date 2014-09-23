@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cat /dev/stdin | xclip -i
+
+# What follows is a bit clunky and I think it's related to the way WMII handles
+# windows. First, we find the REPL window and move the mouse onto it and click
+# on it so that we are sure that it's focused. Finally, we middle-click to
+# paste the content of the clipboard.
+
+xdotool search --name "REPL" \
+     mousemove --window %@ 42 42 \
+         click 1 \
+         click 2
