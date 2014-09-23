@@ -5,6 +5,3 @@ username = Benoit Myard <benoit@saalaa.net>
 #pretxncommit.pep8 = python:hghooks.code.pep8hook
 #pretxncommit.pyflakes = python:hghooks.code.pyflakeshook
 #pretxncommit.pdb = python:hghooks.code.pdbhook
-
-[extensions]
-prompt = /home/benoit/vendor/hg-prompt/prompt.py
