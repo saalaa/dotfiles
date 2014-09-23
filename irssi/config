@@ -202,4 +202,3 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
-hilights = ( { text = "Nicolab "; nick = "yes"; word = "yes"; } );
