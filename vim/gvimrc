@@ -1,4 +1,11 @@
-colorscheme base16-ocean
+" Only Apple screens are crisp enough for light themes
+if has("gui_macvim")
+  set background=light
+  colorscheme base16-ocean
+else
+  set background=dark
+  colorscheme base16-twilight
+end
 
 " Remove menubar and toolbar on GNU/Linux
 if has("gui_gtk2")
@@ -12,7 +19,7 @@ set guioptions-=r
 
 " Cross-platform typography
 if has("gui_gtk2")
-    set guifont=Droid\ Sans\ Mono\ 13
+    set guifont=Droid\ Sans\ Mono\ 11
 elseif has("gui_macvim")
     set guifont=Droid\ Sans\ Mono:h13
 elseif has("gui_win32")
