@@ -5,5 +5,5 @@ syntax: glob
 bin/x86
 
 vim/vim/.netrwhist
-wmii/history.actions
-wmii/history.progs
+
+wmii/history.*
