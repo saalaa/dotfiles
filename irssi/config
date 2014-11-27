@@ -5,6 +5,7 @@ servers = (
     address = "irc.freenode.net";
     chatnet = "freenode";
     port = "6667";
+    ssl = "yes";
     autoconnect = "yes";
   }
 );
@@ -22,13 +23,10 @@ chatnets = {
 # THIS SECTION DEALS WITH THE CHANNELS THAT YOU WANT TO JOIN ON CONNECT
 
 channels = (
-  { name = "#openbsd";      chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#mongodb";      chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#clojure";      chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#go-nuts";      chatnet = "freenode"; autojoin = "yes"; },
   { name = "#putaindecode"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#putaindechat"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#archlinux";    chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#bordeauxjs";   chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#gcu";          chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -201,4 +199,8 @@ settings = {
     recode_out_default_charset = "utf-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS INVITES DCC DCCMSGS HILIGHT";
+  };
 };
