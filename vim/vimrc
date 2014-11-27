@@ -9,10 +9,7 @@ filetype plugin indent on
 syntax on
 
 set background=dark
-colorscheme solarized
-
-set background=light
-colorscheme base16-grayscale
+colorscheme slate
 
 set list
 set listchars=tab:¬\ ,trail:¬
@@ -102,6 +99,12 @@ nnoremap <silent> <C-y> :<C-u>CtrlPYankring<cr>
 nnoremap <silent> <C-u> :<C-u>CtrlPUndo<cr>
 nnoremap <silent> <C-i> :<C-u>CtrlPLine<cr>
 nnoremap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
+
+
+" Settings for Distraction Free Mode
+" ----------------------------------
+
+nnoremap <Leader>z :LiteDFMToggle<CR>i<Esc>`^
 
 
 " Tabs, trailing spaces and long lines
