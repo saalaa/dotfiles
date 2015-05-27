@@ -9,7 +9,8 @@ filetype plugin indent on
 syntax on
 
 set background=dark
-colorscheme slate
+colorscheme base16-grayscale
+"colorscheme slate
 
 set list
 set listchars=tab:¬\ ,trail:¬
@@ -91,7 +92,6 @@ let g:ctrlp_match_window = 'bottom,order:ttb,max:15'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Nicely follows keyboard pattern rtyuio and p
-
 nnoremap <silent> <C-e> :<C-u>CtrlPLauncher<cr>
 nnoremap <silent> <C-r> :<C-u>CtrlPMRU<cr>
 nnoremap <silent> <C-t> :<C-u>CtrlPTag<cr>
@@ -112,3 +112,23 @@ nnoremap <Leader>z :LiteDFMToggle<CR>i<Esc>`^
 
 autocmd Syntax * syn match ErrorMsg /\s\+$/
 autocmd Syntax * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+
+" Slime configuration
+" -------------------
+
+let g:slime_target = 'tmux'
+
+
+" Attempt to use `ag`
+" -------------------
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+
+" Kiwi files fix
+" --------------
+
+au BufRead,BufNewFile *.kiwi setf html
