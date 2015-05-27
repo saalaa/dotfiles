@@ -2,7 +2,7 @@
 
 MODKEY=Mod1
 
-WMII_TERM=gnome-terminal
+WMII_TERM=roxterm
 
 WMII_NORMCOLORS='#888888 #222222 #222222'
 WMII_FOCUSCOLORS='#ffffff #222222 #222222'
@@ -50,8 +50,18 @@ clock() {
     echo $(date +%a\ %Y-%m-%d\ %H:%M:%S)
 }
 
+net() {
+    host -W 1 saalaa.net >/dev/null
+
+    if [ "$?" = "1" ]; then
+      echo 'OFFLINE |'
+    fi
+}
+
 status() {
-    echo -n label $(battery) '|' $(load) '|' $(clock)
+    echo -n label $(net) $(battery) '|' $(load) '|' $(clock)
+
+    sleep 59 # Main `wmiirc` sleeps for 1s already.
 }
 
 
@@ -62,11 +72,14 @@ run_if_exists() {
     which $1 > /dev/null && $1 &
 }
 
-run_if_exists gnome-settings-daemon
+# run_if_exists gnome-settings-daemon
 run_if_exists gnome-power-manager
 run_if_exists nm-applet
 run_if_exists system-config-printer-applet
 run_if_exists gnome-sound-applet
 run_if_exists gnome-volume-control-applet
+
+# Keyboard repeat trigger/rate
+set r rate 400 50
 
 export `gnome-keyring-daemon`
