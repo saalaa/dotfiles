@@ -9,3 +9,5 @@ dopath("mod_statusbar")
 dopath("mod_sp")
 
 dopath("mod_xinerama")
+
+os.execute("/home/benoit/src/dotfiles/notion/autostart &")
