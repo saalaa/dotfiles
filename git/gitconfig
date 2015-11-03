@@ -1,0 +1,11 @@
+[user]
+	email = benoit@saalaa.net
+	name = Benoit Myard
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+[push]
+	default = simple
+[github]
+	user = saalaa
