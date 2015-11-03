@@ -1,10 +1,10 @@
 " Only Apple screens are crisp enough for light themes
 if has("gui_macvim")
   set background=light
-  colorscheme base16-ocean
+  " colorscheme base16-ocean
 else
   set background=dark
-  colorscheme base16-twilight
+  " colorscheme base16-twilight
 end
 
 " Remove menubar and toolbar on GNU/Linux
