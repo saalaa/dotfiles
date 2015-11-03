@@ -9,7 +9,7 @@ mod_statusbar.create{
 mod_statusbar.launch_statusd{
     date={
         date_format='%a %Y-%m-%d %H:%M',
-    },      
+    },
     load={ },
     mail={ },
 }
