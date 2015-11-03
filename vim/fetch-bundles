@@ -5,43 +5,36 @@ set -e
 URLS=(
   https://github.com/aaronj1335/underscore-templates.vim.git
   https://github.com/altercation/vim-colors-solarized.git
-  https://github.com/bilalq/lite-dfm.git
   https://github.com/chriskempson/base16-vim.git
   https://github.com/digitaltoad/vim-jade.git
   https://github.com/fxn/vim-monochrome.git
   https://github.com/gregsexton/gitv.git
   https://github.com/groenewege/vim-less.git
-  https://github.com/jpalardy/vim-slime.git
   https://github.com/junegunn/goyo.vim.git
   https://github.com/kien/ctrlp.vim.git
   https://github.com/mattn/ctrlp-launcher.git
-  https://github.com/mattn/emmet-vim.git
   https://github.com/mattn/gist-vim.git
   https://github.com/mattn/webapi-vim.git
   https://github.com/mileszs/ack.vim.git
-  https://github.com/mjbrownie/browser.vim.git
   https://github.com/scrooloose/syntastic.git
   https://github.com/sgur/ctrlp-extensions.vim.git
   https://github.com/sjl/gundo.vim.git
   https://github.com/tpope/vim-commentary.git
+  https://github.com/tpope/vim-fireplace.git
   https://github.com/tpope/vim-fugitive.git
   https://github.com/tpope/vim-pathogen.git
-  https://github.com/tpope/vim-speeddating.git
-  https://github.com/tpope/vim-surround.git
-  https://github.com/tpope/vim-unimpaired.git
   https://github.com/vim-scripts/very-monochrome-grey-theme.git
-  https://github.com/wting/rust.vim.git
   https://github.com/zhaocai/GoldenView.Vim.git
 )
 
-if [ ! -d "./bundles" ]; then
-  echo Error: bundles directory does not exist
+if [ ! -d "./bundle" ]; then
+  echo Error: bundle directory does not exist
   exit 1
 fi
 
 for url in ${URLS[@]}; do
   echo Fetching $url
 
-  (cd ./bundles && \
+  (cd ./bundle && \
     git clone -q $url)
 done
