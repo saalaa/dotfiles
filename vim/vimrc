@@ -8,10 +8,9 @@ filetype plugin indent on
 " Enable colors
 syntax on
 
-" set background=dark
-" colorscheme monochrome
-" colorscheme base16-grayscale
-" colorscheme slate
+" Set colorscheme
+set background=light
+colorscheme ancient
 
 let mapleader = "\<Space>"
 
