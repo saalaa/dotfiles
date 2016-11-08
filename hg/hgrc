@@ -1,6 +1,9 @@
 [ui]
 username = Benoit Myard <myardbenoit@gmail.com>
 
+[extensions]
+convert =
+
 [hooks]
 #pretxncommit.pep8 = python:hghooks.code.pep8hook
 #pretxncommit.pyflakes = python:hghooks.code.pyflakeshook
