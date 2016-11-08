@@ -1,5 +1,5 @@
 [ui]
-username = Benoit Myard <benoit@saalaa.net>
+username = Benoit Myard <myardbenoit@gmail.com>
 
 [hooks]
 #pretxncommit.pep8 = python:hghooks.code.pep8hook
