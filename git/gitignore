@@ -1,4 +1,6 @@
 .elasticbeanstalk/
+.git/
+*.sw?
 *.elc
 *.pyc
 *~

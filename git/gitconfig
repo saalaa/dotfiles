@@ -1,5 +1,5 @@
 [user]
-	email = benoit@saalaa.net
+	email = myardbenoit@gmail.com
 	name = Benoit Myard
 [alias]
 	ci = commit
@@ -7,5 +7,3 @@
 	st = status
 [push]
 	default = simple
-[github]
-	user = saalaa
