@@ -8,6 +8,7 @@ URLS=(
   https://github.com/chriskempson/base16-vim.git
   https://github.com/digitaltoad/vim-jade.git
   https://github.com/fxn/vim-monochrome.git
+  https://github.com/glench/vim-jinja2-syntax.git
   https://github.com/gregsexton/gitv.git
   https://github.com/groenewege/vim-less.git
   https://github.com/junegunn/goyo.vim.git
