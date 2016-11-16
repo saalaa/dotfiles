@@ -17,6 +17,7 @@ URLS=(
   https://github.com/mattn/gist-vim.git
   https://github.com/mattn/webapi-vim.git
   https://github.com/mileszs/ack.vim.git
+  https://github.com/rust-lang/rust.vim.git
   https://github.com/scrooloose/syntastic.git
   https://github.com/sgur/ctrlp-extensions.vim.git
   https://github.com/sjl/gundo.vim.git
