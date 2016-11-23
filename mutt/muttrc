@@ -1,0 +1,123 @@
+set realname = "Benoit Myard"
+set from = "myardbenoit@gmail.com"
+
+set alias_file = ~/.aliases
+set signature = ~/.signature
+
+# GPG configuration
+# -----------------
+
+set pgp_sign_as = 0xF699E0C2
+set pgp_replyencrypt = yes
+
+my_hdr "X-PGP-Key: https://keybase.io/myardbenoit/key.asc"
+
+# Editor
+# ------
+
+set editor = vim
+set send_charset = utf-8
+
+# Headers configuration
+# ---------------------
+
+set edit_headers = yes
+set envelope_from = yes
+set use_from = yes
+
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# SMTP configuration
+# ------------------
+
+set smtp_url = "smtp://myardbenoit@smtp.gmail.com:587/"
+
+# IMAP configuration
+# ------------------
+
+set imap_user = "myardbenoit@gmail.com"
+set imap_keepalive = 900
+
+# IMAP Folders
+# ------------
+
+set folder = "imaps://imap.gmail.com:993"
+
+set spoolfile = "+INBOX"
+set mbox      = "+[Gmail]/All Mail"
+set postponed = "+[Gmail]/Drafts"
+set trash     = "+[Gmail]/Bin"
+
+mailboxes "+INBOX"
+
+# Essential configuration
+# -----------------------
+
+set move = yes
+set delete = yes
+set copy = no
+
+unset mark_old
+unset mail_check_recent
+
+set sort_alias = alias
+set reverse_alias = yes
+set reverse_name = yes
+
+set mailcap_path     = ~/.mutt/mailcap
+set certificate_file = ~/.mutt/certificates
+
+set header_cache     = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+
+# Index view
+# ----------
+
+set sort = threads                        # like gmail
+set sort_aux = reverse-last-date-received # like gmail
+set uncollapse_jump                       # don't collapse on an unread message
+set sort_re                               # thread based on regex
+
+set date_format = "%Y-%m-%d %H:%M"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Pager view
+# ----------
+
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+# Status Bar
+# ----------
+
+set status_chars  = " *%A"
+set status_format = "%f: %m messages (%n new / %d to delete / %t tagged / %p postponed)"
+
+# External configuration
+# ----------------------
+
+source ~/.aliases
+
+source ~/.mutt/pgp.muttrc
+source ~/.mutt/mac-os-fix.muttrc
+source ~/.mutt/keybindings.muttrc
+
+#source ~/.mutt/mutt-colors-solarized-light-256.muttrc
+#source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+
+#source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
+#source ~/.mutt/mutt-colors-solarized-light-16.muttrc
+
+source ~/.mutt/solarized-custom.muttrc

@@ -1,0 +1,2 @@
+# Fix SMTP authentication on Mac OS
+set smtp_authenticators = 'gssapi:login'
