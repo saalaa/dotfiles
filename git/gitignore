@@ -1,7 +1,0 @@
-.elasticbeanstalk/
-.git/
-*.sw?
-*.elc
-*.pyc
-*~
-*.netrwhist

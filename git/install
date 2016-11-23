@@ -1,4 +1,6 @@
 #!/bin/sh
 
+mkdir ~/.config ~/.config/git
+
 ln -s `pwd`/gitconfig ~/.gitconfig
-ln -s `pwd`/gitignore ~/.gitignore
+ln -s `pwd`/ignore ~/.config/git/ignore
