@@ -135,7 +135,8 @@ if executable('ag')
 endif
 
 
-" Kiwi files fix
-" --------------
+" Custom file rules
+" -----------------
 
-au BufRead,BufNewFile *.kiwi setf html
+au BufRead /tmp/mutt-* setf mail
+au BufRead Vagrantfile setf ruby
