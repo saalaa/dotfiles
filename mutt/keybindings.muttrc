@@ -18,3 +18,6 @@ bind pager G          bottom
 bind pager R          group-reply
 
 bind attach <return>  view-mailcap
+
+# Somehow the last word is duplicated
+macro index ! "<save-message>$mbox^H^H^H^H<enter>"

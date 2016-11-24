@@ -57,12 +57,13 @@ mailboxes "+INBOX"
 # Essential configuration
 # -----------------------
 
-set move = yes
+set mark_old = no
+set move = no
 set delete = yes
 set copy = no
 
-unset mark_old
-unset mail_check_recent
+set mail_check_recent = no
+set confirmappend = no
 
 set sort_alias = alias
 set reverse_alias = yes
