@@ -30,6 +30,7 @@ set expandtab           " tabs are spaces
 set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
 set shiftwidth=2        " number of spaces for autoindent
+set textwidth=80        " default text width
 set autoindent          " enable autoindentation
 
 " On Mac OS X, modelines is set to 0 due to a vulnerability. It makes sense to
@@ -76,20 +77,11 @@ nnoremap <D-/> :<C-u>Ag<space>
 nnoremap <silent> <S-k> :<C-u>Ag <C-r>=expand("<cword>")<cr><cr>
 
 
-" Settings for goldenview.vim
+" Settings for WoodenView.vim
 " ---------------------------
 
-let g:goldenview__enable_default_mapping = 0
-
-nmap <silent> <leader>l       <Plug>GoldenViewSplit
-nmap <silent> <leader>n       <Plug>GoldenViewNext
-nmap <silent> <leader>p       <Plug>GoldenViewPrevious
-nmap <silent> <leader><Enter> <Plug>GoldenViewSwitchMain
-
-" nmap <silent> <C-l> <Plug>GoldenViewSplit
-" nmap <silent> <C-n> <Plug>GoldenViewNext
-" nmap <silent> <C-S-n> <Plug>GoldenViewPrevious
-" nmap <silent> <C-Enter> <Plug>GoldenViewSwitchMain
+nmap <silent> <leader>l <Plug>WoodenViewSplit
+nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 
 
 " Settings for ctrlp.vim
