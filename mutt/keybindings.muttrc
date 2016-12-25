@@ -1,8 +1,6 @@
 # Keybindings (kind of like vi)
 # -----------------------------
 
-bind index \Cr        imap-fetch-mail
-
 bind index R          group-reply
 
 bind index gg         first-entry
@@ -19,5 +17,11 @@ bind pager R          group-reply
 
 bind attach <return>  view-mailcap
 
+macro index \Cr "<sync-mailbox><imap-fetch-mail>"
+macro pager u   "|urlview<enter>"
+
+macro pager l "<pipe-entry>lynx -stdin -force_html -dump|less<enter>"
+macro attach l "<pipe-entry>lynx -stdin -force_html -dump|less<enter>"
+
 # Somehow the last word is duplicated
-macro index ! "<save-message>$mbox^H^H^H^H<enter>"
+macro index !   "<save-message>$mbox^H^H^H^H<enter>"

@@ -13,3 +13,4 @@ text/html; ~/.mutt/open.sh %s html
 
 # Unidentified files
 application/octet-stream; ~/.mutt/open.sh %s data
+application/octetstream; ~/.mutt/open.sh %s data
