@@ -36,6 +36,4 @@ tags
 *.elc
 *.pyc
 *.db
-*.mo
-*.po
 *~
