@@ -91,19 +91,11 @@ let g:ctrlp_match_window = 'bottom,order:ttb,max:15'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Nicely follows keyboard pattern rtyuio and p
-nnoremap <silent> <C-e> :<C-u>CtrlPLauncher<cr>
-nnoremap <silent> <C-r> :<C-u>CtrlPMRU<cr>
 nnoremap <silent> <C-t> :<C-u>CtrlPTag<cr>
-nnoremap <silent> <C-y> :<C-u>CtrlPYankring<cr>
+nnoremap <silent> <C-y> :<C-u>CtrlPMRU<cr>
 nnoremap <silent> <C-u> :<C-u>CtrlPUndo<cr>
 nnoremap <silent> <C-i> :<C-u>CtrlPLine<cr>
 nnoremap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
-
-
-" Settings for Distraction Free Mode
-" ----------------------------------
-
-nnoremap <leader>z :Goyo<CR>
 
 
 " Tabs, trailing spaces and long lines
@@ -111,12 +103,6 @@ nnoremap <leader>z :Goyo<CR>
 
 autocmd Syntax * syn match ErrorMsg /\s\+$/
 autocmd Syntax * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-
-
-" Slime configuration
-" -------------------
-
-let g:slime_target = 'tmux'
 
 
 " Attempt to use `ag`

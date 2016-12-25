@@ -5,5 +5,5 @@ ln -s `pwd`/gvimrc ~/.gvimrc
 
 mkdir ~/.vim ~/.vim/bundle
 
-ln -s `pwd`/fetch-bundles ~/.vim/fetch-bundles
-ln -s `pwd`/colors ~/.vim/colors
+ln -s `pwd`/fetch-bundles ~/.vim
+ln -s `pwd`/update-bundles ~/.vim
