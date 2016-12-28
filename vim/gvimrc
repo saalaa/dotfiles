@@ -10,11 +10,11 @@ set guioptions-=r
 
 " Cross-platform typography
 if has("gui_gtk2")
-    set guifont=Droid\ Sans\ Mono\ 11
+    set guifont=Monospace\ 11
 elseif has("gui_macvim")
-    set guifont=Droid\ Sans\ Mono:h13
+    set guifont=Monospace:h13
 elseif has("gui_win32")
-    set guifont=Droid\ Sans\ Mono:h13
+    set guifont=Monospace:h13
 end
 
 " Highlight eol, etc..
