@@ -15,3 +15,6 @@ for item in ~/.vim/bundle/*; do
   (cd $item && \
     git pull | sed 's/^/  | /')
 done
+
+# Update helptags on plugins
+vim -c Helptags -c q

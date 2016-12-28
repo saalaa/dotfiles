@@ -14,6 +14,9 @@ URLS=(
   # Edition assistance
   https://github.com/tpope/vim-commentary.git
 
+  # Git integration
+  https://github.com/tpope/vim-fugitive.git
+
   # Generic syntax checker
   https://github.com/scrooloose/syntastic.git
 
@@ -27,7 +30,6 @@ URLS=(
 
   # https://github.com/sgur/ctrlp-extensions.vim.git
   # https://github.com/mattn/ctrlp-launcher.git
-  # https://github.com/tpope/vim-fugitive.git
   # https://github.com/gregsexton/gitv.git
   # https://github.com/junegunn/goyo.vim.git
   # https://github.com/mattn/gist-vim.git
@@ -47,3 +49,6 @@ for url in ${URLS[@]}; do
   (cd ~/.vim/bundle && \
     git clone -q $url | sed 's/^/  | /')
 done
+
+# Update helptags on plugins
+vim -c Helptags -c q
