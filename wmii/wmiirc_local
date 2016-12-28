@@ -2,38 +2,22 @@
 
 MODKEY=Mod1
 
-WMII_TERM=roxterm
+WMII_TERM=gnome-terminal
 
 WMII_NORMCOLORS='#888888 #222222 #222222'
 WMII_FOCUSCOLORS='#ffffff #222222 #222222'
 
 WMII_BACKGROUND='#333333'
-WMII_FONT='Ubuntu Mono'
-
-
-# Local Keybindings
-# -----------------
-
-wi_events <<!
-Key Control-Alt-l # Lock screen
-  ~/.wmii/slock
-Key XF86AudioMute
-  amixer set Master toggle
-Key XF86AudioRaiseVolume
-  amixer set Master 1%+ unmute
-Key XF86AudioLowerVolume
-  amixer set Master 1%- unmute
-Key XF86AudioNext
-  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null
-Key XF86AudioPrev
-  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous > /dev/null
-Key XF86AudioPlay
-  DISPLAY=:0 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause > /dev/null
-!
+WMII_FONT='Monospace'
 
 
 # Status bar
 # ----------
+
+WITH_BATTERY=
+if [ -d /sys/class/power_supply/BAT1 ]; then
+    WITH_BATTERY=yes
+fi
 
 battery() {
     capacity=$(cat  /sys/class/power_supply/BAT1/energy_full)
@@ -51,35 +35,39 @@ clock() {
 }
 
 net() {
-    host -W 1 saalaa.net >/dev/null
+    ping -c 1 xanax.xyz &>/dev/null
 
-    if [ "$?" = "1" ]; then
-      echo 'OFFLINE |'
+    if [ "$?" != "0" ]; then
+        echo 'OFFLINE |'
     fi
 }
 
 status() {
-    echo -n label $(net) $(battery) '|' $(load) '|' $(clock)
+    if [ "$WITH_BATTERY" ]; then
+        echo -n label $(net) $(battery) '|' $(load) '|' $(clock)
+    else
+        echo -n label $(net) $(load) '|' $(clock)
+    fi
 
     sleep 59 # Main `wmiirc` sleeps for 1s already.
 }
 
 
-# Startup applications
+# Applications startup
 # --------------------
 
 run_if_exists() {
-    which $1 > /dev/null && $1 &
+    which $1 &>/dev/null && $1 &
 }
 
-# run_if_exists gnome-settings-daemon
 run_if_exists gnome-power-manager
-run_if_exists nm-applet
-run_if_exists system-config-printer-applet
+run_if_exists gnome-settings-daemon
 run_if_exists gnome-sound-applet
 run_if_exists gnome-volume-control-applet
+run_if_exists nm-applet
+run_if_exists system-config-printer-applet
 
-# Keyboard repeat trigger/rate
+# Keyboard repeat/trigger rate
 set r rate 400 50
 
 export `gnome-keyring-daemon`
