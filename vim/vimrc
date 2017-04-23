@@ -1,6 +1,30 @@
-" Bootstrap pathogen.
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+call plug#begin()
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Advanced vim features
+Plug 'saalaa/WoodenView.vim'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+
+" Languages support
+Plug 'aaronj1335/underscore-templates.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'gera/vim-ledger'
+Plug 'glench/vim-jinja2-syntax'
+Plug 'groenewege/vim-less'
+Plug 'rust-lang/rust.vim'
+Plug 'sophacles/vim-bundle-mako'
+
+" Color schemes (vimcolors.com)
+Plug 'saalaa/ancient-colors.vim'
+Plug 'clinstid/eink.vim'
+Plug 'robertmeta/nofrils'
+Plug 'fxn/vim-monochrome'
+
+call plug#end()
 
 " Load filetype-specific indent and plugin files
 filetype plugin indent on
@@ -30,7 +54,7 @@ set expandtab           " tabs are spaces
 set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
 set shiftwidth=2        " number of spaces for autoindent
-set textwidth=80        " default text width
+set textwidth=79        " default text width
 set autoindent          " enable autoindentation
 
 " On Mac OS X, modelines is set to 0 due to a vulnerability. It makes sense to
@@ -60,22 +84,6 @@ vmap <C-j> xp`[V`]
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Navigate through tabs
-nnoremap <C-tab>   :tabnext<cr>
-inoremap <C-tab>   <ESC>:tabnext<cr>
-nnoremap <C-S-tab> :tabprevious<cr>
-inoremap <C-S-tab> <ESC>:tabprevious<cr>
-
-
-" Settings for ag.vim
-" -------------------
-
-" Search with `ag`
-nnoremap <D-/> :<C-u>Ag<space>
-
-" Make K useful again
-nnoremap <silent> <S-k> :<C-u>Ag <C-r>=expand("<cword>")<cr><cr>
-
 
 " Settings for WoodenView.vim
 " ---------------------------
@@ -84,18 +92,12 @@ nmap <silent> <leader>l <Plug>WoodenViewSplit
 nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 
 
-" Settings for ctrlp.vim
-" ----------------------
+" Settings for fzf.vim
+" --------------------
 
-let g:ctrlp_match_window = 'bottom,order:ttb,max:15'
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-" Nicely follows keyboard pattern rtyuio and p
-nnoremap <silent> <C-t> :<C-u>CtrlPTag<cr>
-nnoremap <silent> <C-y> :<C-u>CtrlPMRU<cr>
-nnoremap <silent> <C-u> :<C-u>CtrlPUndo<cr>
-nnoremap <silent> <C-i> :<C-u>CtrlPLine<cr>
-nnoremap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
+nmap <silent> <C-p> :<C-u>Files<cr>
+nmap <silent> <C-o> :<C-u>Buffers<cr>
+nmap <silent> <C-i> :<C-u>Lines<cr>
 
 
 " Tabs, trailing spaces and long lines
@@ -105,16 +107,10 @@ autocmd Syntax * syn match ErrorMsg /\s\+$/
 autocmd Syntax * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 
-" Attempt to use `ag`
-" -------------------
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-
 " Custom file rules
 " -----------------
+
+au BufEnter * syntax sync fromstart
 
 au BufRead /tmp/mutt-* setf mail
 au BufRead Vagrantfile setf ruby

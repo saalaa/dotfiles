@@ -1,9 +1,6 @@
-#!/bin/sh
+#!/bin/sh -e
 
 ln -s `pwd`/vimrc  ~/.vimrc
-ln -s `pwd`/gvimrc ~/.gvimrc
 
-mkdir ~/.vim ~/.vim/bundle
-
-ln -s `pwd`/fetch-bundles ~/.vim
-ln -s `pwd`/update-bundles ~/.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
