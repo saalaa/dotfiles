@@ -8,6 +8,8 @@ Plug 'saalaa/WoodenView.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'vitalk/vim-simple-todo'
+Plug 'junegunn/vim-journal'
 
 " Languages support
 Plug 'aaronj1335/underscore-templates.vim'
@@ -23,6 +25,12 @@ Plug 'saalaa/ancient-colors.vim'
 Plug 'clinstid/eink.vim'
 Plug 'robertmeta/nofrils'
 Plug 'fxn/vim-monochrome'
+Plug 'clinstid/eink.vim'
+Plug 'bruth/vim-newsprint-theme'
+Plug 'laserswald/chameleon.vim'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'pbrisbin/vim-colors-off'
+Plug 'vim-scripts/Cleanroom'
 
 call plug#end()
 
@@ -83,6 +91,12 @@ vmap <C-j> xp`[V`]
 " Center searches inside screen
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+
+" Disable annoying key bindings
+" -----------------------------
+
+let g:simple_todo_map_insert_mode_keys = 0
 
 
 " Settings for WoodenView.vim
