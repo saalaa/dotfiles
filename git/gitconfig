@@ -7,3 +7,5 @@
 	st = status
 [push]
 	default = simple
+[merge]
+  tool = vimdiff
