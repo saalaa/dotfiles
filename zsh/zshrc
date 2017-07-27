@@ -25,6 +25,9 @@ source $ZSH/oh-my-zsh.sh
 # Override theme dirty git marker
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!%{$fg[yellow]%}"
 
+# Override title
+ZSH_THEME_TERM_TITLE_IDLE="%~"
+
 # Custom path
 export PATH=$PATH:/bin
 export PATH=$PATH:/usr/bin
@@ -33,17 +36,33 @@ export PATH=$PATH:/sbin
 export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/usr/local/sbin
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/node_modules/.bin
 export PATH=$PATH:node_modules/.bin
 
+export GOPATH=$HOME/go
+
 # Concurrent ZSH / messed history fix
 setopt no_share_history
-unsetopt share_history
 
 # Attempt to disable control flow in order to prevent vim from hanging. This of
 # course doesn't really work.
 stty stop undef
 stty start undef
+
+#
+# Key bindings
+#
+
+bindkey -v
+
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^p' up-history
+bindkey '^n' down-history
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
