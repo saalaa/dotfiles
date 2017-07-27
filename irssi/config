@@ -1,5 +1,3 @@
-# THIS SECTION DEALS WITH THE SERVERS YOU CONNECT TO
-
 servers = (
   {
     address = "irc.freenode.net";
@@ -10,8 +8,6 @@ servers = (
   }
 );
 
-# THIS SECTION DEALS WITH THE COMMANDS THAT ARE SENT WHEN YOU JOIN A SERVER
-
 chatnets = {
   freenode = {
     type = "IRC";
@@ -19,66 +15,15 @@ chatnets = {
   };
 };
 
-
-# THIS SECTION DEALS WITH THE CHANNELS THAT YOU WANT TO JOIN ON CONNECT
-
 channels = (
-  { name = "#putaindecode"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#putaindechat"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#bordeauxjs";   chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#gcu";          chatnet = "freenode"; autojoin = "yes"; }
-);
+  { name = "#gcu";        chatnet = "freenode"; autojoin = "yes"; },
 
-aliases = {
-  J = "join";
-  WJOIN = "join -window";
-  WQUERY = "query -window";
-  LEAVE = "part";
-  BYE = "quit";
-  EXIT = "quit";
-  SIGNOFF = "quit";
-  DESCRIBE = "action";
-  DATE = "time";
-  HOST = "userhost";
-  LAST = "lastlog";
-  SAY = "msg *";
-  WI = "whois";
-  WII = "whois $0 $0";
-  WW = "whowas";
-  W = "who";
-  N = "names";
-  M = "msg";
-  T = "topic";
-  C = "clear";
-  CL = "clear";
-  K = "kick";
-  KB = "kickban";
-  KN = "knockout";
-  BANS = "ban";
-  B = "ban";
-  MUB = "unban *";
-  UB = "unban";
-  IG = "ignore";
-  UNIG = "unignore";
-  SB = "scrollback";
-  UMODE = "mode $N";
-  WC = "window close";
-  WN = "window new hide";
-  SV = "say Irssi $J ($V) - http://irssi.org/";
-  GOTO = "sb goto";
-  CHAT = "dcc chat";
-  RUN = "SCRIPT LOAD";
-  CALC = "exec - if which bc &>/dev/null\\; then echo '$*' | bc | awk '{print \"$*=\"$$1}'\\; else echo bc was not found\\; fi";
-  SBAR = "STATUSBAR";
-  INVITELIST = "mode $C +I";
-  Q = "QUERY";
-  "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
-  EXEMPTLIST = "mode $C +e";
-  ATAG = "WINDOW SERVER";
-  UNSET = "set -clear";
-  RESET = "set -default";
-  LL = "lastlog -word ft";
-};
+  { name = "#archlinux";  chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#debian";     chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#django";     chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#python";     chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#vim";        chatnet = "freenode"; autojoin = "yes"; }
+);
 
 statusbar = {
   # formats:
@@ -195,7 +140,8 @@ settings = {
   core = {
     real_name = "Benoit";
     user_name = "benoit";
-    nick = "saalaa__";
+    nick = "saalaa";
+
     recode_out_default_charset = "utf-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };
