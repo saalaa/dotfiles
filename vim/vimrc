@@ -32,7 +32,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
 
 " Color schemes (vimcolors.com)
-Plug 'alessandroyorba/monrovia'
 Plug 'bruth/vim-newsprint-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
