@@ -32,6 +32,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
 
 " Color schemes (vimcolors.com)
+Plug 'fneu/breezy'
 Plug 'bruth/vim-newsprint-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
@@ -63,8 +64,8 @@ colorscheme ancient
 
 let mapleader = "\<Space>"
 
-set list
-set listchars=tab:¬\ ,trail:¬
+" set list
+" set listchars=tab:¬\ ,trail:¬
 
 set nowrap              " never wrap long lines
 set number              " show line numbers
@@ -151,3 +152,8 @@ au BufEnter * syntax sync fromstart
 
 au BufRead /tmp/mutt-* setf mail
 au BufRead Vagrantfile setf ruby
+
+au BufEnter *.py set sw=4 ts=4 st=4
+
+au BufEnter *.py nmap <silent> <leader>b o__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
+au BufEnter *.py nmap <silent> <leader>B O__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
