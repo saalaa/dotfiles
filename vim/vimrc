@@ -21,6 +21,7 @@ Plug 'vitalk/vim-simple-todo',  { 'for': 'journal' }
 
 " Languages support
 Plug 'aaronj1335/underscore-templates.vim'
+Plug 'arrufat/vala.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'gera/vim-ledger'
 Plug 'glench/vim-jinja2-syntax'
