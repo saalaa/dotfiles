@@ -5,6 +5,7 @@
 	ci = commit
 	co = checkout
 	st = status
+  git = !exec git
 [push]
 	default = simple
 [merge]
