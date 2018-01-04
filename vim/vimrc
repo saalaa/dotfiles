@@ -1,10 +1,10 @@
 call plug#begin()
 
 Plug 'saalaa/WoodenView.vim'
-Plug 'saalaa/ancient-colors.vim'
 
 " Advanced vim features
 Plug 'kien/ctrlp.vim'
+Plug 'rking/ag.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -20,7 +20,6 @@ Plug 'vitalk/vim-simple-todo',  { 'for': 'journal' }
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'arrufat/vala.vim'
 Plug 'digitaltoad/vim-jade'
-Plug 'gera/vim-ledger'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'groenewege/vim-less'
 Plug 'honza/dockerfile.vim'
@@ -30,23 +29,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
 
 " Color schemes (vimcolors.com)
-Plug 'fneu/breezy'
-Plug 'bruth/vim-newsprint-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'clinstid/eink.vim'
-Plug 'fxn/vim-monochrome'
-Plug 'junegunn/seoul256.vim'
-Plug 'laserswald/chameleon.vim'
 Plug 'owickstrom/vim-colors-paramount'
-Plug 'pbrisbin/vim-colors-off'
-Plug 'rakr/vim-one'
-Plug 'rakr/vim-two-firewatch'
-Plug 'robertmeta/nofrils'
-Plug 'ryanpcmcquen/true-monochrome_vim'
-Plug 'tomasr/molokai'
-Plug 'vim-scripts/Cleanroom'
-Plug 'widatama/vim-phoenix'
 
 call plug#end()
 
@@ -57,8 +40,8 @@ filetype plugin indent on
 syntax on
 
 " Set colorscheme
-set background=light
-colorscheme ancient
+set background=dark
+colorscheme paramount
 
 let mapleader = "\<Space>"
 
