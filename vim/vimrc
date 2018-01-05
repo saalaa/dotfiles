@@ -105,12 +105,17 @@ nmap <silent> <leader>l <Plug>WoodenViewSplit
 nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 
 
-" Settings for fzf.vim
-" --------------------
+" Settings for ctrlp.vim
+" ----------------------
 
-nmap <silent> <C-p> :<C-u>Files<cr>
-nmap <silent> <C-o> :<C-u>Buffers<cr>
-nmap <silent> <C-i> :<C-u>BLines<cr>
+let g:ctrlp_match_window = 'bottom,order:btt,max:15'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+nmap <silent> <C-t> :<C-u>CtrlPTag<cr>
+nmap <silent> <C-y> :<C-u>CtrlPMRU<cr>
+nmap <silent> <C-u> :<C-u>CtrlPUndo<cr>
+nmap <silent> <C-i> :<C-u>CtrlPLine<cr>
+nmap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
 
 
 " NerdTree key binding
