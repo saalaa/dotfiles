@@ -3,7 +3,7 @@ call plug#begin()
 Plug 'saalaa/WoodenView.vim'
 
 " Advanced vim features
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
@@ -104,6 +104,20 @@ nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 
 " Settings for ctrlp.vim
 " ----------------------
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15'
+
+let g:ctrlp_abbrev = {
+\   'gmode': 'i',
+\   'abbrevs': [
+\     {
+\       'pattern': ' ',
+\       'expanded': '',
+\       'mode': 'prfz'
+\     }
+\   ]
+\ }
+
 
 nmap <silent> <C-t> :<C-u>CtrlPTag<cr>
 nmap <silent> <C-y> :<C-u>CtrlPMRU<cr>
