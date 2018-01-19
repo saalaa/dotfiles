@@ -4,17 +4,14 @@ Plug 'saalaa/WoodenView.vim'
 
 " Advanced vim features
 Plug 'kien/ctrlp.vim'
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
-
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
-
-Plug 'junegunn/vim-journal',    { 'for': 'journal' }
-Plug 'vitalk/vim-simple-todo',  { 'for': 'journal' }
+Plug 'vitalk/vim-simple-todo',  { 'for': 'markdown' }
 
 " Languages support
 Plug 'aaronj1335/underscore-templates.vim'
@@ -61,7 +58,7 @@ set expandtab           " tabs are spaces
 set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
 set shiftwidth=2        " number of spaces for autoindent
-set textwidth=79        " default text width
+set textwidth=99        " default text width
 set autoindent          " enable autoindentation
 
 " On Mac OS X, modelines is set to 0 due to a vulnerability. It makes sense to
@@ -108,14 +105,17 @@ nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 " Settings for ctrlp.vim
 " ----------------------
 
-let g:ctrlp_match_window = 'bottom,order:btt,max:15'
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
 nmap <silent> <C-t> :<C-u>CtrlPTag<cr>
 nmap <silent> <C-y> :<C-u>CtrlPMRU<cr>
 nmap <silent> <C-u> :<C-u>CtrlPUndo<cr>
 nmap <silent> <C-i> :<C-u>CtrlPLine<cr>
 nmap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
+
+
+" Settings for ack.vim
+" --------------------
+
+let g:ackprg = 'ag --vimgrep'
 
 
 " NerdTree key binding
