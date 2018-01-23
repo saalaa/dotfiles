@@ -105,6 +105,12 @@ nmap <silent> <leader>j <Plug>WoodenViewSwitchMain
 " Settings for ctrlp.vim
 " ----------------------
 
+nmap <silent> <C-t> :<C-u>CtrlPTag<cr>
+nmap <silent> <C-y> :<C-u>CtrlPMRU<cr>
+nmap <silent> <C-u> :<C-u>CtrlPUndo<cr>
+nmap <silent> <C-i> :<C-u>CtrlPLine<cr>
+nmap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
+
 let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15'
 
 let g:ctrlp_abbrev = {
@@ -117,13 +123,6 @@ let g:ctrlp_abbrev = {
 \     }
 \   ]
 \ }
-
-
-nmap <silent> <C-t> :<C-u>CtrlPTag<cr>
-nmap <silent> <C-y> :<C-u>CtrlPMRU<cr>
-nmap <silent> <C-u> :<C-u>CtrlPUndo<cr>
-nmap <silent> <C-i> :<C-u>CtrlPLine<cr>
-nmap <silent> <C-o> :<C-u>CtrlPBuffer<cr>
 
 
 " Settings for ack.vim
