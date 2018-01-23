@@ -1,0 +1,6 @@
+if [ -n "$DESKTOP_SESSION" ]; then
+  if [ -x gnome-keyring-daemon ]; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+  fi
+fi

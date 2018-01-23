@@ -4,4 +4,9 @@ if [ -e ~/.zshrc ]; then
   mv ~/.zshrc ~/.zshrc.bak
 fi
 
+if [ -e ~/.zshenv ]; then
+  mv ~/.zshenv ~/.zshenv.bak
+fi
+
 ln -s `pwd`/zshrc ~/.zshrc
+ln -s `pwd`/zshenv ~/.zshenv
