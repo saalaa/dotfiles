@@ -1,6 +1,0 @@
-syntax: regexp
-\.elasticbeanstalk
-\.elc$
-\.pyc$
-~$
-\.netrwhist$

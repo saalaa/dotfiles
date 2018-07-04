@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ln -s `pwd`/hgignore ~/.hgignore
-ln -s `pwd`/hgrc     ~/.hgrc
-
