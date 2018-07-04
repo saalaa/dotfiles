@@ -6,6 +6,7 @@
 	co = checkout
 	st = status
   git = !exec git
+  graph = log --oneline --decorate --all --graph
 [push]
 	default = simple
 [merge]
