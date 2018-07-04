@@ -27,6 +27,7 @@ Plug 'sophacles/vim-bundle-mako'
 
 " Color schemes (vimcolors.com)
 Plug 'owickstrom/vim-colors-paramount'
+Plug 'saalaa/ancient-colors.vim'
 
 call plug#end()
 
@@ -37,7 +38,7 @@ filetype plugin indent on
 syntax on
 
 " Set colorscheme
-set background=dark
+set background=light
 colorscheme paramount
 
 let mapleader = "\<Space>"
@@ -129,6 +130,17 @@ let g:ctrlp_abbrev = {
 " --------------------
 
 let g:ackprg = 'ag --vimgrep'
+
+if executable('ag')
+  " set grepprg="ag --vimgrep ."
+
+  " set grepprg="ag --vimgrep $*"
+  " set grepformat="%f:%l:%c:%m"
+
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+endif
+
 
 
 " NerdTree key binding
