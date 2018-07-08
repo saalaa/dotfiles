@@ -1,9 +1,0 @@
-syntax: glob
-
-**.swp
-
-bin/x86
-
-vim/vim/.netrwhist
-
-wmii/history.*
