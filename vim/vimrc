@@ -59,7 +59,7 @@ set expandtab           " tabs are spaces
 set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
 set shiftwidth=2        " number of spaces for autoindent
-set textwidth=99        " default text width
+set textwidth=79        " default text width
 set autoindent          " enable autoindentation
 
 " On Mac OS X, modelines is set to 0 due to a vulnerability. It makes sense to
