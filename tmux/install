@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ -e ~/.zshrc ]; then
+  mv ~/.tmux.conf ~/.tmux.conf.bak.$$
+fi
+
 ln -s `pwd`/tmux.conf ~/.tmux.conf
 
 ln -s `pwd`/tmux-ancient.conf ~/.tmux-ancient.conf
