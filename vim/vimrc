@@ -11,7 +11,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
-Plug 'vitalk/vim-simple-todo',  { 'for': 'markdown' }
 
 " Languages support
 Plug 'aaronj1335/underscore-templates.vim'
