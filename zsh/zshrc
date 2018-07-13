@@ -23,7 +23,9 @@ setopt no_share_history
 # Aliases
 # -------
 
-alias open='xdg-open'
+if which xdg-open > /dev/null; then
+  alias open='xdg-open'
+fi
 
 alias ls='ls --color'
 
