@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+if [ ! -d ~/.config ]; then
+  mdir ~/.config
+fi
+
+ln -s `pwd`/flake8  ~/.config/flake8
