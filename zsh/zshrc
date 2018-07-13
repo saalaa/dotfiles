@@ -105,6 +105,12 @@ function prompt_git() {
   fi
 }
 
+function prompt_env() {
+  if [[ -n $VIRTUAL_ENV ]]; then
+    print "(%{$fg[yellow]%}$(basename "$VIRTUAL_ENV")%{$reset_color%}) "
+  fi
+}
+
 function set_title {
   if [[ $TERM == "screen"* ]]; then
     print -nR $'\033]0;'$2$'\a'
@@ -112,7 +118,7 @@ function set_title {
 }
 
 function set_prompt() {
-  export PS1="$(prompt_cwd)$(prompt_git)$(prompt_caret)"
+  export PS1="$(prompt_cwd)$(prompt_git)$(prompt_env)$(prompt_caret)"
 }
 
 precmd() {
