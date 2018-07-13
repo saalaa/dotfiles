@@ -89,6 +89,12 @@ nmap n nzzzv
 nmap N Nzzzv
 
 
+" Pre-defined syntastic checkers
+" ------------------------------
+
+let g:syntastic_python_checkers = ['python', 'flake8']
+
+
 " Fix broken simple-todo default config
 " -------------------------------------
 
