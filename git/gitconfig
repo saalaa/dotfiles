@@ -9,5 +9,6 @@
   graph = log --oneline --decorate --all --graph
 [push]
 	default = simple
+	followTags = true
 [merge]
   tool = vimdiff
