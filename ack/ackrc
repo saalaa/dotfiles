@@ -1,0 +1,16 @@
+--sort-files
+--color
+
+--ignore-dir=env
+--ignore-dir=build
+--ignore-dir=dist
+--ignore-dir=vendor
+--ignore-dir=bower_components
+--ignore-dir=node_modules
+--ignore-dir=__pycache__
+--ignore-dir=.cache
+--ignore-dir=.pytest_cache
+--ignore-dir=.eggs
+--ignore-dir=.git
+--ignore-dir=.bzr
+--ignore-dir=.hg
