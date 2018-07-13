@@ -23,6 +23,8 @@ setopt no_share_history
 # Aliases
 # -------
 
+alias open='xdg-open'
+
 alias ls='ls --color'
 
 alias l='ls -lah'
