@@ -193,7 +193,7 @@ do_bootstrap() {
 
   pacman -Syy
 
-  pacstrap /mnt base grub efibootmgr ntp openssh "$microcode"
+  pacstrap /mnt base grub efibootmgr ntp sudo "$microcode"
 }
 
 do_chroot() {
@@ -203,21 +203,24 @@ do_chroot() {
 }
 
 do_install_apps() {
-  pacman --noconfirm -S base-devel sudo ntp openssh docker nginx vim zsh tmux \
-    ack git nodejs npm
+  echo "Installing Applications"
 
+  pacman --noconfirm -S base-devel openssh docker nginx vim zsh tmux ack git \
+    nodejs npm
+
+  systemctl enable sshd.service &>/dev/null
   systemctl enable docker.service &>/dev/null
   systemctl enable nginx.service &>/dev/null
 }
 
 do_install_gnome() {
-  pacman --noconfirm -S gnome gnome-extra chromium darktable
+  echo "Installing GNOME"
+
+  pacman --noconfirm -S gnome gnome-extra gnome-keyring chromium darktable termite \
+    networkmanager network-manager-applet ttf-droid fonts-tlwg
 
   systemctl enable gdm.service &>/dev/null
-}
-
-do_install_x_apps() {
-  pacman --noconfirm -S 
+  systemctl enable NetworkManager.service &>/dev/null
 }
 
 do_configure_swap() {
@@ -239,7 +242,7 @@ do_configure_fstab() {
 do_configure_keyboard() {
   echo "Configuring keyboard"
 
-  loadkeys uk
+  echo "KEYMAP=uk" > /etc/vconsole.conf
 }
 
 do_configure_grub() {
@@ -258,20 +261,36 @@ do_configure_time() {
   echo "Configuring time"
 
   ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
   hwclock --systohc
 }
 
+do_configure_lang() {
+  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+  echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
+  echo "th_TH.UTF-8 UTF-8" >> /etc/locale.gen
+
+  locale-gen > /dev/null
+
+  echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+  echo "LANGUAGE=en_US" >> /etc/locale.conf
+  echo "LC_COLLATE=C" >> /etc/locale.conf
+}
+
 do_configure_sudo() {
+  echo "Configuring sudo"
+
   echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 }
 
-do_configure_hostname() {
-  echo "Configuring host name"
+do_configure_host() {
+  echo "Configuring host"
 
   echo "$hostname" > /etc/hostname
 
-  echo "127.0.0.1 localhost" > /etc/hosts
-  echo "127.0.1.1 $hostname.localdomain	$hostname" >> /etc/hosts
+  echo "127.0.0.1 localhost" >> /etc/hosts
+  echo "::1       localhost" >> /etc/hosts
+  echo "127.0.1.1 $hostname" >> /etc/hosts
 }
 
 do_configure_user() {
@@ -308,7 +327,6 @@ do_enable_services() {
 
   systemctl enable dhcpcd.service &>/dev/null
   systemctl enable ntpd.service &>/dev/null
-  systemctl enable sshd.service &>/dev/null
 }
 
 do_set_password() {
@@ -402,8 +420,9 @@ else
   do_configure_swap
   do_configure_grub
   do_configure_time
+  do_configure_lang
   do_configure_sudo
-  do_configure_hostname
+  do_configure_host
 
   do_enable_services
 
