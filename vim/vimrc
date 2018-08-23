@@ -13,9 +13,11 @@ Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
 
 " Languages support
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'arrufat/vala.vim'
 Plug 'digitaltoad/vim-jade'
+Plug 'fatih/vim-go'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'groenewege/vim-less'
 Plug 'honza/dockerfile.vim'
@@ -93,12 +95,7 @@ nmap N Nzzzv
 " ------------------------------
 
 let g:syntastic_python_checkers = ['python', 'flake8']
-
-
-" Fix broken simple-todo default config
-" -------------------------------------
-
-let g:simple_todo_map_insert_mode_keys = 0
+let g:syntastic_javascript_checkers = ['jshint']
 
 
 " Settings for WoodenView.vim
@@ -158,3 +155,5 @@ au BufEnter *.py set sw=4 ts=4 st=4
 
 au BufEnter *.py nmap <silent> <leader>b o__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
 au BufEnter *.py nmap <silent> <leader>B O__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
+
+au BufEnter *.go nmap <F5> :<C-u>GoBuild<cr>
