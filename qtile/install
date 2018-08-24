@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+mkdir ~/.config ~/.config/qtile
+
+ln -s `pwd`/config.py  ~/.config/qtile/config.py
