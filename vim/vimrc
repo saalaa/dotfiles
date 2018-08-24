@@ -25,6 +25,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " Color schemes (vimcolors.com)
 Plug 'owickstrom/vim-colors-paramount'
@@ -48,12 +49,15 @@ let mapleader = "\<Space>"
 " set listchars=tab:¬\ ,trail:¬
 
 set nowrap              " never wrap long lines
-set number              " show line numbers
+set nonumber            " don't show line numbers
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 set wildmenu            " visual autocomplete for command menu
 set showcmd             " show command in bottom bar
 set showmatch           " highlight matching [{()}]
+
+" Unify clipboard
+" set clipboard=unnamedplus
 
 " Bloody indentation configuration
 set expandtab           " tabs are spaces
@@ -150,8 +154,6 @@ au BufEnter * syntax sync fromstart
 
 au BufRead /tmp/mutt-* setf mail
 au BufRead Vagrantfile setf ruby
-
-au BufEnter *.py set sw=4 ts=4 st=4
 
 au BufEnter *.py nmap <silent> <leader>b o__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
 au BufEnter *.py nmap <silent> <leader>B O__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
