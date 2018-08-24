@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
-mkdir ~/.config ~/.config/qtile
+if [ ! -d ~/.config/qtile ]; then
+  mkdir -p ~/.config ~/.config/qtile
+fi
 
 ln -s `pwd`/config.py  ~/.config/qtile/config.py
