@@ -206,7 +206,7 @@ do_install_apps() {
   echo "Installing Applications"
 
   pacman --noconfirm -S base-devel openssh docker nginx vim zsh tmux ack git \
-    nodejs npm flake8 xclip
+    nodejs npm flake8 go go-tools xclip
 
   systemctl enable sshd.service &>/dev/null
   systemctl enable docker.service &>/dev/null
