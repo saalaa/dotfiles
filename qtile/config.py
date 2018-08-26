@@ -3,25 +3,83 @@ import os
 from libqtile import layout, bar, widget
 from libqtile.command import lazy
 from libqtile.config import (
-    Key, Screen, Group, Drag, Click
+    Key, Screen, Group, Match, Drag, Click
 )
+
+
+def on_stop(qtile):
+    qtile.cmd_spawn('''
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify
+            /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+    ''')
+
+
+def on_prev(qtile):
+    qtile.cmd_spawn('''
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify
+            /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+    ''')
+
+
+def on_play_pause(qtile):
+    qtile.cmd_spawn('''
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify
+            /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+    ''')
+
+
+def on_next(qtile):
+    qtile.cmd_spawn('''
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify
+            /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+    ''')
+
+
+def mixer(qtile, arg):
+    mixer = os.path.join(
+        os.path.dirname(__file__), 'mixer'
+    )
+
+    qtile.cmd_spawn(
+        'sh {} {}'.format(mixer, arg)
+    )
+
+
+def on_mute(qtile):
+    mixer(qtile, 'toggle-mute')
+
+
+def on_lower_volume(qtile):
+    mixer(qtile, 'lower-volume')
+
+
+def on_raise_volume(qtile):
+    mixer(qtile, 'raise-volume')
+
 
 mod = 'mod1'
 
 keys = [
     Key([mod], 'Return', lazy.spawn('gnome-terminal')),
 
-    # Launch arbitrary commands
+    # Launch system command prompt
     Key([mod], 'p', lazy.spawncmd()),
 
-    # Toggle between maximized and tiled (in stack)
-    Key([mod], 't', lazy.layout.toggle_split()),
+    # Launch Qtile command prompt
+    Key([mod], 'o', lazy.qtilecmd()),
+
+
+    # Toggle top bar visibility
+    # Key([mod], 'x', lazy.hide_show_bar('top')),
 
     # Cycle through configured layouts
     Key([mod], 'space', lazy.next_layout()),
 
     # Manage floating clients
     Key([mod, 'shift'], 'space', lazy.window.toggle_floating()),
+
+    # Toggle between maximized and tiled (in stack)
+    Key([mod], 't', lazy.layout.toggle_split()),
 
     # Focus clients through movements
     Key([mod], 'k', lazy.layout.up()),
@@ -35,8 +93,23 @@ keys = [
     Key([mod, 'shift'], 'h', lazy.layout.shuffle_left()),
     Key([mod, 'shift'], 'l', lazy.layout.shuffle_right()),
 
+    # Resize clients/stacks through movements
+    Key([mod, 'control'], 'h', lazy.layout.grow_left()),
+    Key([mod, 'control'], 'l', lazy.layout.grow_right()),
+    Key([mod, 'control'], 'k', lazy.layout.grow()),
+    Key([mod, 'control'], 'j', lazy.layout.shrink()),
+
     # Lock screen
     # Key([mod, 'shift'], 'l', lazy.spawn('slock')),
+
+    Key([], 'XF86AudioStop', lazy.function(on_stop)),
+    Key([], 'XF86AudioPrev', lazy.function(on_prev)),
+    Key([], 'XF86AudioPlay', lazy.function(on_play_pause)),
+    Key([], 'XF86AudioNext', lazy.function(on_next)),
+
+    Key([], 'XF86AudioMute', lazy.function(on_mute)),
+    Key([], 'XF86AudioLowerVolume', lazy.function(on_lower_volume)),
+    Key([], 'XF86AudioRaiseVolume', lazy.function(on_raise_volume)),
 
     # Kill focused client
     Key([mod, 'shift'], 'w', lazy.window.kill()),
@@ -48,7 +121,14 @@ keys = [
     Key([mod, 'shift'], 'q', lazy.shutdown()),
 ]
 
-groups = [Group(i) for i in 'asdf']
+groups = [
+    Group('a', layout='@floating'),             # Web
+    Group('s', layout='@wmii'),                 # Work 1
+    Group('d', layout='@wmii'),                 # Work 2
+    Group('f', layout='@floating', matches=[    # Misc.
+        Match(wm_class=['Spotify'])
+    ])
+]
 
 for i in groups:
     keys.extend([
@@ -60,24 +140,53 @@ for i in groups:
     ])
 
 layouts = [
-    layout.Wmii(
-        name='@wmii', border_width=1, margin=5
-    ),
     layout.Floating(
         name='@floating'
+    ),
+    layout.MonadWide(
+        name='@monad-w', border_width=1, margin=5
+    ),
+    layout.MonadTall(
+        name='@monad-t', border_width=1, margin=5
+    ),
+    layout.Wmii(
+        name='@wmii', border_width=1, margin=5
     )
 ]
 
 widget_defaults = dict(
-    font='monospace',
+    font='Monospace',
     fontsize=12,
     padding=3,
 )
 
 extension_defaults = widget_defaults.copy()
 
+graph_defaults = dict(
+    border_width=0
+)
+
 screens = [
     Screen(
+        # top=bar.Bar(
+        #     [
+        #         widget.Systray(
+        #             icon_size=24
+        #         ),
+        #         widget.Spacer(),
+        #         widget.TextBox('HD:'),
+        #         widget.HDDGraph(**graph_defaults),
+        #         widget.TextBox('Swap:'),
+        #         widget.SwapGraph(**graph_defaults),
+        #         widget.TextBox('Memory:'),
+        #         widget.MemoryGraph(**graph_defaults),
+        #         widget.TextBox('CPU:'),
+        #         widget.CPUGraph(**graph_defaults),
+        #         widget.TextBox('Network:'),
+        #         widget.NetGraph(**graph_defaults)
+        #     ],
+        #     32
+        # ),
         bottom=bar.Bar(
             [
                 widget.Wallpaper(
@@ -87,11 +196,12 @@ screens = [
                         '~/Pictures/wallpapers/'
                     )
                 ),
+                widget.GroupBox(
+                    highlight_method='block'
+                ),
                 widget.CurrentLayout(),
-                widget.GroupBox(),
                 widget.Prompt(),
                 widget.Spacer(),
-                # widget.Systray(),
                 widget.Pomodoro(),
                 widget.Clock(
                     format='%Y-%m-%d %H:%M'
@@ -102,7 +212,6 @@ screens = [
     )
 ]
 
-# Drag floating layouts.
 mouse = [
     Drag([mod], 'Button1', lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
@@ -114,10 +223,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 
-main = None
-
 follow_mouse_focus = True
-
 bring_front_click = True
 
 cursor_warp = False
@@ -143,12 +249,6 @@ auto_fullscreen = True
 
 focus_on_window_activation = 'smart'
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, github issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = 'LG3D'
+
+main = None

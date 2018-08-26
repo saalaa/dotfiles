@@ -5,3 +5,4 @@ if [ ! -d ~/.config/qtile ]; then
 fi
 
 ln -s `pwd`/config.py  ~/.config/qtile/config.py
+ln -s `pwd`/mixer  ~/.config/qtile/mixer
