@@ -68,10 +68,6 @@ keys = [
     # Launch Qtile command prompt
     Key([mod], 'o', lazy.qtilecmd()),
 
-
-    # Toggle top bar visibility
-    # Key([mod], 'x', lazy.hide_show_bar('top')),
-
     # Cycle through configured layouts
     Key([mod], 'space', lazy.next_layout()),
 
@@ -122,10 +118,10 @@ keys = [
 ]
 
 groups = [
-    Group('a', layout='@floating'),             # Web
-    Group('s', layout='@wmii'),                 # Work 1
-    Group('d', layout='@wmii'),                 # Work 2
-    Group('f', layout='@floating', matches=[    # Misc.
+    Group('a'),
+    Group('s'),
+    Group('d'),
+    Group('f', matches=[
         Match(wm_class=['Spotify'])
     ])
 ]
@@ -139,18 +135,40 @@ for i in groups:
         Key([mod, 'shift'], i.name, lazy.window.togroup(i.name)),
     ])
 
+layouts_defaults = dict(
+    border_focus='215578',
+    border_width=2,
+)
+
+floating_layout = layout.Floating(
+    float_rules=[
+        {'wmclass': 'confirm'},
+        {'wmclass': 'dialog'},
+        {'wmclass': 'download'},
+        {'wmclass': 'error'},
+        {'wmclass': 'file_progress'},
+        {'wmclass': 'notification'},
+        {'wmclass': 'splash'},
+        {'wmclass': 'toolbar'},
+        {'wmclass': 'confirmreset'},  # gitk
+        {'wmclass': 'makebranch'},  # gitk
+        {'wmclass': 'maketag'},  # gitk
+        {'wname': 'branchdialog'},  # gitk
+        {'wname': 'pinentry'},  # GPG key password entry
+        {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    ],
+    **layouts_defaults
+)
+
 layouts = [
-    layout.Floating(
-        name='@floating'
+    layout.Wmii(
+        name='@wmii', margin=5, **layouts_defaults
     ),
     layout.MonadWide(
-        name='@monad-w', border_width=1, margin=5
+        name='@monad-w', margin=5, **layouts_defaults
     ),
     layout.MonadTall(
-        name='@monad-t', border_width=1, margin=5
-    ),
-    layout.Wmii(
-        name='@wmii', border_width=1, margin=5
+        name='@monad-t', margin=5, **layouts_defaults
     )
 ]
 
@@ -168,25 +186,6 @@ graph_defaults = dict(
 
 screens = [
     Screen(
-        # top=bar.Bar(
-        #     [
-        #         widget.Systray(
-        #             icon_size=24
-        #         ),
-        #         widget.Spacer(),
-        #         widget.TextBox('HD:'),
-        #         widget.HDDGraph(**graph_defaults),
-        #         widget.TextBox('Swap:'),
-        #         widget.SwapGraph(**graph_defaults),
-        #         widget.TextBox('Memory:'),
-        #         widget.MemoryGraph(**graph_defaults),
-        #         widget.TextBox('CPU:'),
-        #         widget.CPUGraph(**graph_defaults),
-        #         widget.TextBox('Network:'),
-        #         widget.NetGraph(**graph_defaults)
-        #     ],
-        #     32
-        # ),
         bottom=bar.Bar(
             [
                 widget.Wallpaper(
@@ -227,23 +226,6 @@ follow_mouse_focus = True
 bring_front_click = True
 
 cursor_warp = False
-
-floating_layout = layout.Floating(float_rules=[
-    {'wmclass': 'confirm'},
-    {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
-    {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
-    {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
-    {'wmclass': 'confirmreset'},  # gitk
-    {'wmclass': 'makebranch'},  # gitk
-    {'wmclass': 'maketag'},  # gitk
-    {'wname': 'branchdialog'},  # gitk
-    {'wname': 'pinentry'},  # GPG key password entry
-    {'wmclass': 'ssh-askpass'},  # ssh-askpass
-])
 
 auto_fullscreen = True
 
