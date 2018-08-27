@@ -135,10 +135,9 @@ for i in groups:
         Key([mod, 'shift'], i.name, lazy.window.togroup(i.name)),
     ])
 
-layouts_defaults = dict(
-    border_focus='215578',
-    border_width=2,
-)
+border_focus = '6666f8'
+border_focus_stack = 'f85521'
+
 
 floating_layout = layout.Floating(
     float_rules=[
@@ -157,18 +156,30 @@ floating_layout = layout.Floating(
         {'wname': 'pinentry'},  # GPG key password entry
         {'wmclass': 'ssh-askpass'},  # ssh-askpass
     ],
-    **layouts_defaults
+    border_focus=border_focus,
+    border_width=2,
 )
 
 layouts = [
     layout.Wmii(
-        name='@wmii', margin=5, **layouts_defaults
+        name='@wmii',
+        margin=5,
+        border_focus=border_focus,
+        border_focus_stack=border_focus_stack,
+        border_width=2,
+
     ),
     layout.MonadWide(
-        name='@monad-w', margin=5, **layouts_defaults
+        name='@monad-w',
+        margin=5,
+        border_focus=border_focus,
+        border_width=2,
     ),
     layout.MonadTall(
-        name='@monad-t', margin=5, **layouts_defaults
+        name='@monad-t',
+        margin=5,
+        border_focus=border_focus,
+        border_width=2,
     )
 ]
 
