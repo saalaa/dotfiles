@@ -8,6 +8,7 @@ Plug 'mileszs/ack.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'jkramer/vim-checkbox'
 
 Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
