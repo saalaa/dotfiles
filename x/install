@@ -2,4 +2,5 @@
 
 set -e
 
-ln -s `pwd`/xsession ~/.xsession
+ln -s `pwd`/Xsession ~/.Xsession
+ln -s `pwd`/Xdefaults ~/.Xdefaults
