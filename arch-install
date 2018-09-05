@@ -217,7 +217,7 @@ do_install_gnome() {
   echo "Installing GNOME"
 
   pacman --noconfirm -S gnome gnome-extra gnome-keyring chromium darktable termite \
-    networkmanager network-manager-applet ttf-droid fonts-tlwg
+    networkmanager network-manager-applet ttf-droid fonts-tlwg rxvt-unicode
 
   systemctl enable gdm.service &>/dev/null
   systemctl enable NetworkManager.service &>/dev/null
