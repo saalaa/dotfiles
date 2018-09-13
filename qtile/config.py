@@ -1,10 +1,23 @@
 import os
 
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 from libqtile.command import lazy
 from libqtile.config import (
     Key, Screen, Group, Match, Drag, Click
 )
+
+import subprocess
+
+
+def spawn(command):
+    return subprocess.Popen(command.trim().split())
+
+
+@hook.subscribe.startup
+def startup():
+    spawn('''
+        compton --backend xrender --daemon
+    ''')
 
 
 def on_stop(qtile):
@@ -96,7 +109,7 @@ keys = [
     Key([mod, 'control'], 'j', lazy.layout.shrink()),
 
     # Lock screen
-    # Key([mod, 'shift'], 'l', lazy.spawn('slock')),
+    Key(['mod4'], 'l', lazy.spawn('slock')),
 
     Key([], 'XF86AudioStop', lazy.function(on_stop)),
     Key([], 'XF86AudioPrev', lazy.function(on_prev)),
@@ -212,12 +225,12 @@ screens = [
                 widget.CurrentLayout(),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.Pomodoro(),
                 widget.Clock(
                     format='%Y-%m-%d %H:%M'
                 )
             ],
-            24
+            24,
+            opacity=.6
         )
     )
 ]
