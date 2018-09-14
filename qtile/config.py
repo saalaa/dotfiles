@@ -60,7 +60,7 @@ def on_raise_volume(qtile):
 mod = 'mod1'
 
 keys = [
-    Key([mod], 'Return', lazy.spawn('gnome-terminal')),
+    Key([mod], 'Return', lazy.spawn('urxvt')),
 
     # Launch system command prompt
     Key([mod], 'p', lazy.spawncmd()),
@@ -232,7 +232,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = True
 
 cursor_warp = False
