@@ -122,7 +122,7 @@ groups = [
     Group('s'),
     Group('d'),
     Group('f', matches=[
-        Match(wm_class=['Spotify'])
+        Match(wm_class=['spotify'])
     ])
 ]
 
@@ -212,7 +212,6 @@ screens = [
                 widget.CurrentLayout(),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.Pomodoro(),
                 widget.Clock(
                     format='%Y-%m-%d %H:%M'
                 )
