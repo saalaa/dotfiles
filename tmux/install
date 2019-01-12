@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -e ~/.zshrc ]; then
+if [ -e ~/.tmux.conf ]; then
   mv ~/.tmux.conf ~/.tmux.conf.bak.$$
 fi
 
