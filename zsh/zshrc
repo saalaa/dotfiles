@@ -36,6 +36,8 @@ alias la='ls -lAh'
 
 alias h='history -i'
 
+alias activate='source env/bin/activate'
+
 setopt extendedglob
 setopt nomatch
 
@@ -77,11 +79,6 @@ zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 setopt notify
 setopt no_autocd
 setopt no_beep
-
-export WORDCHARS=''
-
-export EDITOR='vim'
-export PAGER='less'
 
 
 # Prompt
@@ -128,3 +125,14 @@ precmd() {
   set_title "$PWD"
   set_prompt
 }
+
+
+# Environment
+# -----------
+
+export WORDCHARS=''
+
+export PATH=~/bin:$PATH
+
+export EDITOR='vim'
+export PAGER='less'
