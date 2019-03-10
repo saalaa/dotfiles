@@ -1,0 +1,11 @@
+#!/bin/sh
+
+which i3-msg
+
+if [ "$?" != 0 ]; then
+  i3-nagbar -m 'Error: i3-msg is not installed'
+  exit 1
+fi
+
+exec i3-nagbar -t warning -m 'Do you really want to exit i3?' \
+  -B 'Yes, exit i3' 'i3-msg exit'
