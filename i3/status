@@ -10,12 +10,19 @@ general {
   color_degraded = "#55858E"
 }
 
+order += "volume master"
 order += "ethernet _first_"
 order += "wireless _first_"
 order += "battery all"
 order += "load"
 order += "tztime local"
 order += "tztime space"
+
+volume master {
+  format = "%volume "
+  format_muted = ""
+  device = "pulse"
+}
 
 ethernet _first_ {
   format_up = "%ip "
@@ -24,7 +31,7 @@ ethernet _first_ {
 
 wireless _first_ {
   format_up = "%essid / %ip "
-  format_down = ""
+  format_down = ""
 }
 
 battery all {
@@ -38,7 +45,7 @@ battery all {
 }
 
 load {
-  format = "%1min "
+  format = "%1min "
 }
 
 tztime local {
