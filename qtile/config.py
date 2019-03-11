@@ -135,7 +135,7 @@ groups = [
     Group('s'),
     Group('d'),
     Group('f', matches=[
-        Match(wm_class=['Spotify'])
+        Match(wm_class=['spotify'])
     ])
 ]
 
