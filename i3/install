@@ -7,4 +7,7 @@ fi
 ln -s `pwd`/config  ~/.config/i3/config
 ln -s `pwd`/status  ~/.config/i3/status
 
+ln -s `pwd`/omenu  ~/.config/i3/
+ln -s `pwd`/pmenu  ~/.config/i3/
+
 ln -s `pwd`/shortcuts  ~/.config/i3/shortcuts

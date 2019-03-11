@@ -48,21 +48,20 @@ bindsym XF86AudioMute exec --no-startup-id playerctl volume .0
 bindsym XF86AudioLowerVolume exec --no-startup-id playerctl volume .05-
 bindsym XF86AudioRaiseVolume exec --no-startup-id playerctl volume .05+
 
+# reload configuration
+bindsym $mod+Shift+r restart
+
+# shortcuts menu
+bindsym $mod+o exec ~/.config/i3/omenu
+
+# applications menu
+bindsym $mod+p exec ~/.config/i3/pmenu
+
 # terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
-# menu
-bindsym $mod+o exec \
-  find -L ~/.config/i3/shortcuts -type f | dmenu "$@" | sh
-
-# menu
-bindsym $mod+p exec dmenu_run
-
 # kill focused window
 bindsym $mod+Shift+c kill
-
-# reload configuration
-bindsym $mod+Shift+r restart
 
 # change focus
 bindsym $mod+h focus left
