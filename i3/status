@@ -15,26 +15,36 @@ order += "wireless _first_"
 order += "battery all"
 order += "load"
 order += "tztime local"
+order += "tztime space"
 
 ethernet _first_ {
-  format_up = ". %ip"
+  format_up = "%ip "
   format_down = ""
 }
 
 wireless _first_ {
-  format_up = ". %ip (%essid)"
+  format_up = "%essid / %ip "
   format_down = ""
 }
 
 battery all {
-  format = "%status %percentage %remaining"
-  format_down = ""
+  format = " %percentage %status"
+  format_down = ""
+
+  status_chr = ""
+  status_unk = ""
+  status_bat = ""
+  status_full = ""
 }
 
 load {
-  format = ". %1min"
+  format = "%1min "
 }
 
 tztime local {
-  format = ". %Y-%m-%d %H:%M"
+  format = "%Y-%m-%d %H:%M "
+}
+
+tztime space {
+  format = ""
 }
