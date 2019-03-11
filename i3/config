@@ -62,7 +62,7 @@ bindsym $mod+p exec dmenu_run
 bindsym $mod+Shift+c kill
 
 # reload configuration
-bindsym $mod+Shift+r reload
+bindsym $mod+Shift+r restart
 
 # change focus
 bindsym $mod+h focus left
@@ -120,12 +120,36 @@ mode "resize" {
   bindsym j resize grow height 10 px or 10 ppt
   bindsym k resize shrink height 10 px or 10 ppt
 
-  bindsym Shift+j resize grow width 10 px or 10 ppt
-  bindsym Shift+k resize shrink width 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+
+  bindsym j resize grow height 5 px or 5 ppt
+  bindsym k resize shrink height 5 px or 5 ppt
+
+  bindsym l resize grow width 5 px or 5 ppt
+  bindsym h resize shrink width 5 px or 5 ppt
+
+  bindsym $mod+r mode "move"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
-  bindsym $mod+r mode "default"
+}
+
+mode "move" {
+  bindsym h move left 10 px
+  bindsym j move down 10 px
+  bindsym k move up 10 px
+  bindsym l move right 10 px
+
+  bindsym Shift+h move left 5 px
+  bindsym Shift+j move down 5 px
+  bindsym Shift+k move up 5 px
+  bindsym Shift+l move right 5 px
+
+  bindsym $mod+r mode "resize"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 client.focused          $border $dblue  $text   $bright
@@ -163,4 +187,8 @@ bar {
   bindsym button5 exec nop
 }
 
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.png
+exec_always --no-startup-id setxkbmap -option compose:ralt
+
+exec_always --no-startup-id dunst -conf ~/.config/i3/dunstrc
+exec_always --no-startup-id nm-applet
