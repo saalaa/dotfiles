@@ -40,29 +40,28 @@ focus_follows_mouse no
 mouse_warping none
 
 # audio keys
-bindsym XF86AudioStop exec --no-startup-id playerctl stop
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioMute exec --no-startup-id playerctl volume .0
-bindsym XF86AudioLowerVolume exec --no-startup-id playerctl volume .05-
-bindsym XF86AudioRaiseVolume exec --no-startup-id playerctl volume .05+
+bindsym XF86AudioStop exec --no-startup-id ~/.config/i3/player stop
+bindsym XF86AudioPrev exec --no-startup-id ~/.config/i3/player previous
+bindsym XF86AudioPlay exec --no-startup-id ~/.config/i3/player play-pause
+bindsym XF86AudioNext exec --no-startup-id ~/.config/i3/player next
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/mixer toggle-mute
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/mixer lower-volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/mixer raise-volume
+
+# reload configuration
+bindsym $mod+Shift+r restart
+
+# shortcuts menu
+bindsym $mod+o exec ~/.config/i3/omenu
+
+# applications menu
+bindsym $mod+p exec ~/.config/i3/pmenu
 
 # terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
-# menu
-bindsym $mod+o exec \
-  find -L ~/.config/i3/shortcuts -type f | dmenu "$@" | sh
-
-# menu
-bindsym $mod+p exec dmenu_run
-
 # kill focused window
 bindsym $mod+Shift+c kill
-
-# reload configuration
-bindsym $mod+Shift+r restart
 
 # change focus
 bindsym $mod+h focus left
@@ -183,8 +182,8 @@ bar {
 
   status_command i3status -c ~/.config/i3/status
 
-  bindsym button4 exec nop
-  bindsym button5 exec nop
+  bindsym button4 exec --no-startup-id ~/.config/i3/mixer raise-volume
+  bindsym button5 exec --no-startup-id ~/.config/i3/mixer lower-volume
 }
 
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.png
@@ -192,3 +191,5 @@ exec_always --no-startup-id setxkbmap -option compose:ralt
 
 exec_always --no-startup-id dunst -conf ~/.config/i3/dunstrc
 exec_always --no-startup-id nm-applet
+
+exec_always --no-startup-id compton --backend xrender --daemon
