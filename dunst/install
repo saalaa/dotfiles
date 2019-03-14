@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+if [ ! -d ~/.config/dunst ]; then
+  mkdir -p ~/.config/dunst
+fi
+
+ln -s `pwd`/dunstrc  ~/.config/dunst

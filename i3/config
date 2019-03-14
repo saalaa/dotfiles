@@ -44,7 +44,7 @@ bindsym XF86AudioStop exec --no-startup-id ~/.config/i3/player stop
 bindsym XF86AudioPrev exec --no-startup-id ~/.config/i3/player previous
 bindsym XF86AudioPlay exec --no-startup-id ~/.config/i3/player play-pause
 bindsym XF86AudioNext exec --no-startup-id ~/.config/i3/player next
-bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/mixer toggle-mute
+bindsym XF85AudioMute exec --no-startup-id ~/.config/i3/mixer toggle-mute
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/mixer lower-volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/mixer raise-volume
 
@@ -162,16 +162,14 @@ bar {
 
   height 32
 
-  font pango:SourceCode Pro Regular 9
-
   colors {
     background $black
     statusline $text
     separator  $bg
 
-		focused_workspace   $black  $dblue   $black
-		active_workspace    $black  $yw      $black
-		inactive_workspace  $bg     $bg      $black
+    focused_workspace   $black  $dblue   $black
+    active_workspace    $black  $yw      $black
+    inactive_workspace  $bg     $bg      $black
     urgent_workspace    $black  $orange  $black
   }
 
@@ -189,7 +187,8 @@ bar {
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.png
 exec_always --no-startup-id setxkbmap -option compose:ralt
 
-exec_always --no-startup-id dunst -conf ~/.config/i3/dunstrc
-exec_always --no-startup-id nm-applet
+exec_always --no-startup-id dunst
+exec_always --no-startup-id pkill pasystray; nm-applet
+# exec_always --no-startup-id pkill pasystray; pasystray
 
 exec_always --no-startup-id compton --backend xrender --daemon

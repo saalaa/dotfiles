@@ -4,13 +4,12 @@ if [ ! -d ~/.config/i3 ]; then
   mkdir -p ~/.config/i3
 fi
 
-ln -s `pwd`/config  ~/.config/i3/config
-ln -s `pwd`/status  ~/.config/i3/status
+ln -s `pwd`/config  ~/.config/i3
+ln -s `pwd`/status  ~/.config/i3
 
-ln -s `pwd`/mixer  ~/.config/i3/
-ln -s `pwd`/player  ~/.config/i3/
+ln -s `pwd`/mixer  ~/.config/i3
+ln -s `pwd`/player  ~/.config/i3
+ln -s `pwd`/omenu  ~/.config/i3
+ln -s `pwd`/pmenu  ~/.config/i3
 
-ln -s `pwd`/omenu  ~/.config/i3/
-ln -s `pwd`/pmenu  ~/.config/i3/
-
-ln -s `pwd`/shortcuts  ~/.config/i3/shortcuts
+ln -s `pwd`/shortcuts  ~/.config/i3
