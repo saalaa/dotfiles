@@ -29,7 +29,7 @@ set $rd      #e89393
 
 font pango:SourceCode Pro Regular 9
 
-gaps inner 10
+gaps inner 15
 
 for_window [class="^.*"] border pixel 3
 
@@ -122,11 +122,11 @@ mode "resize" {
   bindsym l resize grow width 10 px or 10 ppt
   bindsym h resize shrink width 10 px or 10 ppt
 
-  bindsym j resize grow height 5 px or 5 ppt
-  bindsym k resize shrink height 5 px or 5 ppt
+  bindsym Shift+j resize grow height 5 px or 5 ppt
+  bindsym Shift+k resize shrink height 5 px or 5 ppt
 
-  bindsym l resize grow width 5 px or 5 ppt
-  bindsym h resize shrink width 5 px or 5 ppt
+  bindsym Shift+l resize grow width 5 px or 5 ppt
+  bindsym Shift+h resize shrink width 5 px or 5 ppt
 
   bindsym $mod+r mode "move"
 
