@@ -7,8 +7,7 @@ fi
 ln -s `pwd`/config  ~/.config/i3
 ln -s `pwd`/status  ~/.config/i3
 
-ln -s `pwd`/mixer  ~/.config/i3
-ln -s `pwd`/player  ~/.config/i3
+ln -s `pwd`/audio  ~/.config/i3
 ln -s `pwd`/omenu  ~/.config/i3
 ln -s `pwd`/pmenu  ~/.config/i3
 

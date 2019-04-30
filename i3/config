@@ -7,31 +7,16 @@ set $ws2 "2: S "
 set $ws3 "3: D "
 set $ws4 "4: F "
 
-set $active  #536B3D
-set $border  #313A28
-set $text    #BBC5B2
-set $text2   #8f8f8f
-set $text3   #8faf9f
-set $bright  #A3D572
-set $bright2 #3F5030
-set $bg      #2c2c2e
-set $bg2     #4c4c4f
+set $background #f9f9f9
+set $foreground #595959
 
-set $black   #000000
-set $orange  #FCBF69
-set $blue    #98CBFE
-set $dblue   #6095C5
-set $ia      #8f8f8f
-set $be      #8faf9f
-set $yw      #ccdc90
-set $gn      #97A824
-set $rd      #e89393
+set $inactive #7a7a7a
+set $urgent   #e89393
 
 font pango:SourceCode Pro Regular 9
+font pango:Misc Tamsyn Regular 11
 
 gaps inner 15
-
-for_window [class="^.*"] border pixel 3
 
 floating_modifier $mod
 
@@ -40,25 +25,27 @@ focus_follows_mouse no
 mouse_warping none
 
 # audio keys
-bindsym XF86AudioStop exec --no-startup-id ~/.config/i3/player stop
-bindsym XF86AudioPrev exec --no-startup-id ~/.config/i3/player previous
-bindsym XF86AudioPlay exec --no-startup-id ~/.config/i3/player play-pause
-bindsym XF86AudioNext exec --no-startup-id ~/.config/i3/player next
-bindsym XF85AudioMute exec --no-startup-id ~/.config/i3/mixer toggle-mute
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/mixer lower-volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/mixer raise-volume
+bindsym XF86AudioStop exec --no-startup-id ~/.config/i3/audio stop
+bindsym XF86AudioPrev exec --no-startup-id ~/.config/i3/audio previous
+bindsym XF86AudioPlay exec --no-startup-id ~/.config/i3/audio play-pause
+bindsym XF86AudioNext exec --no-startup-id ~/.config/i3/audio next
+
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/audio lower-volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/audio raise-volume
+
+bindsym XF85AudioMute exec --no-startup-id ~/.config/i3/audio toggle-mute
 
 # reload configuration
 bindsym $mod+Shift+r restart
 
 # shortcuts menu
-bindsym $mod+o exec ~/.config/i3/omenu
+bindsym $mod+o exec --no-startup-id ~/.config/i3/omenu
 
 # applications menu
-bindsym $mod+p exec ~/.config/i3/pmenu
+bindsym $mod+p exec --no-startup-id ~/.config/i3/pmenu
 
 # terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -113,20 +100,22 @@ bindsym $mod+Shift+s move container to workspace $ws2
 bindsym $mod+Shift+d move container to workspace $ws3
 bindsym $mod+Shift+f move container to workspace $ws4
 
+bindsym $mod+e mode "gaps"
+
+mode "gaps" {
+  bindsym plus gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"; \
+    gaps inner current set 15
+}
+
 bindsym $mod+r mode "resize"
 
 mode "resize" {
-  bindsym j resize grow height 10 px or 10 ppt
-  bindsym k resize shrink height 10 px or 10 ppt
-
-  bindsym l resize grow width 10 px or 10 ppt
-  bindsym h resize shrink width 10 px or 10 ppt
-
-  bindsym Shift+j resize grow height 5 px or 5 ppt
-  bindsym Shift+k resize shrink height 5 px or 5 ppt
-
-  bindsym Shift+l resize grow width 5 px or 5 ppt
-  bindsym Shift+h resize shrink width 5 px or 5 ppt
+  bindsym minus resize shrink width 5 px or 5 ppt
+  bindsym plus resize grow width 5 px or 5 ppt
 
   bindsym $mod+r mode "move"
 
@@ -151,44 +140,54 @@ mode "move" {
   bindsym Escape mode "default"
 }
 
-client.focused          $border $dblue  $text   $bright
-client.unfocused        $bg2    $bg2    $text2  $bright2
-client.focused_inactive $bg2    $bg2    $text3  $bright2
-client.urgent           $rd     $gn     $yw     $active
+for_window [class=".*"] border pixel 5
+for_window [class="Rhythmbox"] move workspace "4: F "
+for_window [class="Eog"] floating enable
+
+#                       background  border      foreground  foo     child
+client.focused          $background $background $foreground $urgent $background
+client.unfocused        $background $background $foreground $urgent $background
+client.focused_inactive $background $background $foreground $urgent $background
+client.urgent           $background $urgent     $foreground $urgent $urgent
 
 bar {
   position bottom
+
+  tray_output none
   tray_padding 5
 
   height 32
 
   colors {
-    background $black
-    statusline $text
-    separator  $bg
+    background $background
+    statusline $foreground
+    separator  $foreground
 
-    focused_workspace   $black  $dblue   $black
-    active_workspace    $black  $yw      $black
-    inactive_workspace  $bg     $bg      $black
-    urgent_workspace    $black  $orange  $black
+    #                   border      background  foreground
+    active_workspace    $background $background $inactive
+    focused_workspace   $background $foreground $background
+    inactive_workspace  $background $background $inactive
+    urgent_workspace    $background $urgent     $background
   }
 
   workspace_buttons yes
   strip_workspace_numbers yes
 
-  separator_symbol " | "
+  separator_symbol " "
 
-  status_command i3status -c ~/.config/i3/status
+  status_command ~/.config/i3/status
 
   bindsym button4 exec --no-startup-id ~/.config/i3/mixer raise-volume
   bindsym button5 exec --no-startup-id ~/.config/i3/mixer lower-volume
 }
 
+exec_always --no-startup-id compton --backend xrender --daemon
+
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.png
+
 exec_always --no-startup-id setxkbmap -option compose:ralt
 
 exec_always --no-startup-id dunst
-exec_always --no-startup-id pkill pasystray; nm-applet
-# exec_always --no-startup-id pkill pasystray; pasystray
 
-exec_always --no-startup-id compton --backend xrender --daemon
+# exec_always --no-startup-id pkill nm-applet; nm-applet
+# exec_always --no-startup-id pkill pasystray; pasystray

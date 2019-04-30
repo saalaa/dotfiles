@@ -1,57 +1,168 @@
-# i3status configuration
+#!/usr/bin/env python
 
-general {
-  interval = 5
+import datetime
+import json
+import sys
+import subprocess
+import time
 
-  colors = false
+interval = 1
+pretty = True
 
-  color_good = "#b6b7b8"
-  color_bad = "#CC1616"
-  color_degraded = "#55858E"
-}
 
-order += "volume master"
-order += "ethernet _first_"
-order += "wireless _first_"
-order += "battery all"
-order += "load"
-order += "tztime local"
-order += "tztime space"
+def echo(data, first_line=True, pretty=False):
+    if type(data) in (list, dict):
+        kwargs = {}
 
-volume master {
-  format = "%volume "
-  format_muted = ""
-  device = "pulse"
-}
+        if pretty:
+            kwargs = {"indent": 2}
 
-ethernet _first_ {
-  format_up = "%ip "
-  format_down = ""
-}
+        if isinstance(data, list):
+            data = [x for x in data if x]
 
-wireless _first_ {
-  format_up = "%essid / %ip "
-  format_down = ""
-}
+        data = json.dumps(data, **kwargs)
 
-battery all {
-  format = " %percentage %status"
-  format_down = ""
+    if not first_line:
+        data = "," + data
 
-  status_chr = ""
-  status_unk = ""
-  status_bat = ""
-  status_full = ""
-}
+    sys.stdout.write(data + "\n")
+    sys.stdout.flush()
 
-load {
-  format = "%1min "
-}
 
-tztime local {
-  format = "%Y-%m-%d %H:%M "
-}
+def iterate(interval):
+    yield True
 
-tztime space {
-  format = ""
-}
+    while True:
+        time.sleep(interval)
+
+        yield False
+
+
+def exec(command):
+    try:
+        stdout = subprocess.check_output(
+            command, stderr=subprocess.STDOUT, shell=True
+        )
+
+        return stdout.decode("utf-8").strip()
+    except Exception:
+        pass
+
+
+def widget_music():
+    song = exec("rhythmbox-client --no-start --print-playing")
+
+    urgent = getattr(widget_music, "cache", None) != song
+
+    setattr(widget_music, "cache", song)
+
+    if not song or song == "-":
+        return
+
+    if len(song) > 96:
+        song = song[:96] + "..."
+
+    full_text = " [ " + song + " ] "
+
+    return {
+        "name": "music",
+        "instance": "music",
+        "markup": "none",
+        "full_text": full_text,
+        "urgent": urgent,
+    }
+
+
+def widget_spacer(size=0):
+    full_text = " " * size
+
+    return {
+        "name": "spacer",
+        "instance": "spacer",
+        "markup": "none",
+        "full_text": full_text,
+    }
+
+
+def widget_clock(format="%Y-%m-%d %H:%M"):
+    full_text = datetime.datetime.now().strftime(format)
+
+    return {
+        "name": "clock",
+        "instance": "clock",
+        "markup": "none",
+        "full_text": full_text,
+    }
+
+
+def widget_volume():
+    volume = exec("~/.config/i3/audio volume")
+
+    try:
+        volume = int(volume.rstrip("%"))
+
+        if volume <= 30:
+            full_text = ""
+        if volume <= 65:
+            full_text = ""
+        else:
+            full_text = ""
+    except Exception:
+        full_text = ""
+
+    return {
+        "name": "volume",
+        "instance": "volume",
+        "markup": "none",
+        "full_text": full_text,
+    }
+
+
+def widget_ethernet():
+    with open("/proc/net/dev") as file:
+        for line in file.readlines():
+            fields = line.split(":", 1)
+
+            if fields[0].strip().startswith("enp"):
+                break
+        else:
+            return
+
+    full_text = ""
+
+    return {
+        "name": "ethernet",
+        "instance": "ethernet",
+        "markup": "none",
+        "full_text": full_text,
+    }
+
+
+if __name__ == "__main__":
+    echo({"version": 1})
+    echo("[")
+
+    for first_iter in iterate(interval):
+        status = [
+            widget_music(),
+            widget_volume(),
+            # {
+            #     "name": "wifi",
+            #     "instance": "wifi",
+            #     "markup": "none",
+            #     "full_text": "",
+            # },
+            widget_ethernet(),
+            {
+                "name": "battery",
+                "instance": "battery",
+                "markup": "none",
+                "full_text": "",
+            },
+            widget_clock(),
+            widget_spacer(),
+        ]
+
+        echo(status, first_iter, pretty)
+
+    echo("]")
