@@ -1,1 +1,44 @@
-/home/benoit/Projects/dotfiles/i3/dunstrc
+# dunst configuration
+
+[global]
+
+monitor = 0
+
+startup_notification = true
+
+font = Misc Tamsyn Regular 11
+
+geometry = "350x0-10-40"
+
+frame_width = 5
+
+markup = strip
+
+format = "<b>%s</b>\n%b"
+
+word_wrap = yes
+
+icon_position = off
+
+separator_height = 5
+separator_color = "#f9f9f9"
+
+frame_color = "#f9f9f9"
+
+[urgency_low]
+timeout = 5
+
+background = "#f9f9f9"
+foreground = "#595959"
+
+[urgency_normal]
+timeout = 5
+
+background = "#f9f9f9"
+foreground = "#595959"
+
+[urgency_critical]
+timeout = 10
+
+background = "#f9f9f9"
+foreground = "#e89393"
