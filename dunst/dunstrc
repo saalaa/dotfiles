@@ -10,20 +10,21 @@ font = Misc Tamsyn Regular 11
 
 geometry = "350x0-10-40"
 
-frame_width = 5
-
 markup = strip
 
-format = "<b>%s</b>\n%b"
+format = "%s\n%b"
 
 word_wrap = yes
 
 icon_position = off
 
-separator_height = 5
-separator_color = "#f9f9f9"
+separator_height = 1
+separator_color = "#595959"
 
 frame_color = "#f9f9f9"
+frame_width = 10
+
+padding = 10
 
 [urgency_low]
 timeout = 5
@@ -40,5 +41,6 @@ foreground = "#595959"
 [urgency_critical]
 timeout = 10
 
+# frame_color = "#e89393"
 background = "#f9f9f9"
 foreground = "#e89393"
