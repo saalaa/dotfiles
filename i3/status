@@ -99,14 +99,10 @@ def widget_volume():
     volume = exec("~/.config/i3/audio volume")
 
     try:
-        volume = int(volume.rstrip("%"))
+        volume = volume.rstrip("%")
+        volume = int(volume)
 
-        if volume <= 30:
-            full_text = ""
-        if volume <= 65:
-            full_text = ""
-        else:
-            full_text = ""
+        full_text = "{}% ".format(volume)
     except Exception:
         full_text = ""
 
@@ -139,6 +135,11 @@ def widget_ethernet():
 
 
 if __name__ == "__main__":
+    try:
+        interval = int(sys.argv[1])
+    except Exception:
+        pass
+
     echo({"version": 1})
     echo("[")
 

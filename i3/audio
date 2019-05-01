@@ -39,7 +39,8 @@ case "$1" in
       exit
     fi
 
-    pactl list sinks | awk '/Base Volume/{ print $5; exit }'
+    pactl list sinks \
+      | awk '/Volume/{ gsub(/[^0-9%]/, "", $5); print $5; exit }'
     ;;
 
   toggle-mute)
