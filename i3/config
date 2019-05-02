@@ -177,8 +177,8 @@ bar {
 
   status_command ~/.config/i3/status 5
 
-  bindsym button4 exec --no-startup-id ~/.config/i3/mixer raise-volume
-  bindsym button5 exec --no-startup-id ~/.config/i3/mixer lower-volume
+  bindsym button4 exec --no-startup-id ~/.config/i3/audio raise-volume
+  bindsym button5 exec --no-startup-id ~/.config/i3/audio lower-volume
 }
 
 exec_always --no-startup-id compton --backend xrender --daemon
