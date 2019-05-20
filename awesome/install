@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+mkdir -p ~/.config/awesome
+
+ln -s `pwd`/audio   ~/.config/awesome
+ln -s `pwd`/rc.lua  ~/.config/awesome
+ln -s `pwd`/status  ~/.config/awesome
+ln -s `pwd`/themes  ~/.config/awesome
