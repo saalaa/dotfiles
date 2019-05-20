@@ -15,7 +15,6 @@ local beautiful = require("beautiful")
 
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 
 -- Extra widgets
 local vicious = require("vicious")
@@ -55,8 +54,6 @@ beautiful.init(
 
 modkey = "Mod1"
 
-terminal = "alacritty"
-
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile.right,
@@ -64,8 +61,6 @@ awful.layout.layouts = {
     awful.layout.suit.magnifier,
     awful.layout.suit.max,
 }
-
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 local function set_wallpaper(s)
   if beautiful.wallpaper then
@@ -148,7 +143,7 @@ globalkeys = gears.table.join(
   awful.key(
     { modkey }, "Return",
     function ()
-      awful.spawn(terminal)
+      awful.spawn("alacritty")
     end,
     {
       description = "open a terminal",
@@ -159,10 +154,21 @@ globalkeys = gears.table.join(
   awful.key(
     { modkey }, "p",
     function()
-      menubar.show()
+      awful.spawn("dmenu_run")
     end,
     {
-      description = "show the menubar",
+      description = "show the menu",
+      group = "launcher"
+    }
+  ),
+
+  awful.key(
+    { modkey }, "l",
+    function()
+      awful.spawn("i3lock -c 000000")
+    end,
+    {
+      description = "show the menu",
       group = "launcher"
     }
   ),
