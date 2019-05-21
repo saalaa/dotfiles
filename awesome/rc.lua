@@ -95,6 +95,10 @@ w_volume = wibox.widget.textbox()
 
 vicious.register(w_volume, vicious.widgets.volume, "vol. $1% |", 1, "Master")
 
+w_wifi = wibox.widget.textbox()
+
+vicious.register(w_wifi, vicious.widgets.wifi, "${ssid} | ", 1, "wlp3s0")
+
 awful.screen.connect_for_each_screen(function(s)
   -- XXX Ideally, only the main screen would get tags and a bar; other screens
   -- should be fullscreen or tiled with a sensible gap.
@@ -127,6 +131,7 @@ awful.screen.connect_for_each_screen(function(s)
           right = 20,
           widget = wibox.container.margin,
           {
+            w_wifi,
             w_volume,
             w_keyboard,
             w_layout,

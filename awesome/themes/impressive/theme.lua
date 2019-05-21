@@ -9,8 +9,8 @@ theme.useless_gap = dpi(15)
 
 theme.wallpaper = dir .. "themes/impressive/wallpaper.jpg"
 
-theme.font = "Noto Sans Display 9"
--- theme.font = "Noto Sans Mono 9"
+-- theme.font = "Noto Sans Display 9"
+theme.font = "Noto Sans Mono 9"
 
 theme.fg_normal = "#CDCDCD"
 theme.fg_focus  = "#60687D"
