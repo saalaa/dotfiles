@@ -14,7 +14,6 @@ set $inactive #7a7a7a
 set $urgent   #e89393
 
 font pango:SourceCode Pro Regular 9
-font pango:Misc Tamsyn Regular 11
 
 gaps inner 15
 
