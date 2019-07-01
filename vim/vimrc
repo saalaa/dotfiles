@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
 
 " Languages support
+Plug 'ambv/black'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'arrufat/vala.vim'
@@ -28,6 +29,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'hylang/vim-hy'
+Plug 'udalov/kotlin-vim'
 
 " Color schemes (vimcolors.com)
 Plug 'owickstrom/vim-colors-paramount'
@@ -42,8 +44,12 @@ filetype plugin indent on
 syntax on
 
 " Set colorscheme
-set background=light
-colorscheme paramount
+" set background=light
+" colorscheme paramount
+
+" Set colorscheme
+set background=dark
+colorscheme industry
 
 let mapleader = "\<Space>"
 
@@ -142,6 +148,9 @@ let g:ctrlp_abbrev = {
 nmap <F9> :<C-u>NERDTreeToggle<cr>
 
 
+let g:black_linelength = '79'
+
+
 " Tabs, trailing spaces and long lines
 " ------------------------------------
 
@@ -161,3 +170,5 @@ au BufEnter *.py nmap <silent> <leader>b o__import__('pdb').set_trace()  # XXX B
 au BufEnter *.py nmap <silent> <leader>B O__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
 
 au BufEnter *.go nmap <F5> :<C-u>GoBuild<cr>
+
+autocmd BufWritePre *.py execute ':Black'
