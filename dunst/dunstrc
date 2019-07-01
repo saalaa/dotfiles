@@ -6,7 +6,7 @@ monitor = 0
 
 startup_notification = true
 
-font = Misc Tamsyn Regular 11
+font = SourceCode Pro Regular 9
 
 geometry = "450x0-10-40"
 
