@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -e ~/.zshrc ]; then
-  mv ~/.zshrc ~/.zshrc.bak.$$
-fi
-
-ln -s `pwd`/zshrc ~/.zshrc

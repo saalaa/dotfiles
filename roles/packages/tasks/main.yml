@@ -1,0 +1,18 @@
+- name: Update cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  loop: "{{ packages.present }}"
+
+- name: Uninstall packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+  become: yes
+  loop: "{{ packages.absent }}"

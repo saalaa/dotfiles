@@ -1,0 +1,29 @@
+#!/usr/bin/sh
+
+set -e
+
+tell() {
+  echo ":: $@"
+  echo
+}
+
+if [ -z "$(which git)" ]; then
+  tell Installing git
+  sudo apt install git
+fi
+
+if [ -z "$(which ansible-playbook)" ]; then
+  tell Installing ansible
+  sudo apt install ansible
+fi
+
+if [ ! -d ~/Projects/dotfiles ]; then
+  tell Cloning repository
+  git clone https://github.com/saalaa/dotfiles.git ~/Projects/dotfiles
+fi
+
+cd ~/Projects/dotfiles
+
+tell Running
+
+ansible-playbook -i hosts dotfiles.yml --ask-become-pass

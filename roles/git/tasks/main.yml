@@ -1,0 +1,22 @@
+- name: Install git
+  apt:
+    name: "git"
+    state: present
+  become: yes
+
+- name: Link ~/.gitconfig
+  file:
+    src: "{{ dotfiles }}/roles/git/files/gitconfig"
+    dest: "{{ home }}/.gitconfig"
+    state: link
+
+- name: Directory ~/.config/git
+  file:
+    path: "{{ home }}/.config/git"
+    state: directory
+
+- name: Link ~/.config/git/ignore
+  file:
+    src: "{{ dotfiles }}/roles/git/files/ignore"
+    dest: "{{ home }}/.config/git/ignore"
+    state: link

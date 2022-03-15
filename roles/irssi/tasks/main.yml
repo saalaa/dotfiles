@@ -1,0 +1,16 @@
+- name: Install irssi
+  apt:
+    name: "irssi"
+    state: present
+  become: yes
+
+- name: Directory ~/.irssi
+  file:
+    path: "{{ home }}/.irssi"
+    state: directory
+
+- name: Link ~/.irssi/config
+  file:
+    src: "{{ dotfiles }}/roles/irssi/files/config"
+    dest: "{{ home }}/.irssi/config"
+    state: link

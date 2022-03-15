@@ -1,0 +1,14 @@
+[user]
+	email = myardbenoit@gmail.com
+	name = Benoit Myard
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	git = !exec git
+	graph = log --oneline --decorate --all --graph
+[push]
+	default = simple
+	followTags = true
+[merge]
+  tool = vimdiff

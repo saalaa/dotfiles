@@ -1,0 +1,17 @@
+- name: Install zsh
+  apt:
+    name: "zsh"
+    state: present
+  become: yes
+
+- name: Link ~/.zshrc
+  file:
+    src: "{{ dotfiles }}/roles/zsh/files/zshrc"
+    dest: "{{ home }}/.zshrc"
+    state: link
+
+- name: Default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  become: yes

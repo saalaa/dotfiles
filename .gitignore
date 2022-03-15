@@ -1,0 +1,3 @@
+roles/bin/files/docker-compose
+roles/bin/files/kubectl
+roles/bin/files/minikube

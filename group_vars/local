@@ -1,0 +1,20 @@
+home: "{{ '~' | expanduser }}"
+dotfiles: "{{ home }}/Projects/dotfiles"
+
+versions:
+  kubectl: v1.23.0
+  compose: 1.29.2
+
+packages:
+  present:
+    - chromium-browser
+    - gnome-tweaks
+    - jq
+
+  absent: []
+
+snaps:
+  present: []
+
+  absent:
+    - firefox

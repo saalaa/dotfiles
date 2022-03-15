@@ -1,0 +1,30 @@
+- name: Install vim
+  apt:
+    name: "vim"
+    state: present
+  become: yes
+
+- name: Link ~/.vimrc
+  file:
+    src: "{{ dotfiles }}/roles/vim/files/vimrc"
+    dest: "{{ home }}/.vimrc"
+    state: link
+
+- name: Link ~/.gvimrc
+  file:
+    src: "{{ dotfiles }}/roles/vim/files/gvimrc"
+    dest: "{{ home }}/.gvimrc"
+    state: link
+
+- name: Directory ~/.vim/autoload
+  file:
+    path: "{{ home }}/.vim/autoload"
+    state: directory
+
+- name: Download plug.vim
+  uri:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ home }}/.vim/autoload/plug.vim"
+
+- name: Install plugins
+  command: vim -c :PluginInstall -c :qall

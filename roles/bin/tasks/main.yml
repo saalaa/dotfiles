@@ -1,0 +1,6 @@
+- name: Link ~/bin
+  file:
+    src: "{{ dotfiles }}/roles/bin/files"
+    dest: "{{ home }}/bin"
+    state: link
+

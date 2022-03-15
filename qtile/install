@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-if [ ! -d ~/.config/qtile ]; then
-  mkdir -p ~/.config ~/.config/qtile
-fi
-
-ln -s `pwd`/config.py  ~/.config/qtile/config.py
-ln -s `pwd`/mixer  ~/.config/qtile/mixer

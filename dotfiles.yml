@@ -1,0 +1,17 @@
+- name: Setup local system
+  hosts: local
+  roles:
+    - packages
+    - snaps
+
+    - ack
+    - bin
+    - docker
+    - enpass
+    - flake8
+    - git
+    - irssi
+    - slack
+    - tmux
+    - vim
+    - zsh

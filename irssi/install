@@ -1,5 +1,0 @@
-#!/bin/sh
-
-mkdir ~/.irssi
-
-ln -s `pwd`/config ~/.irssi/config

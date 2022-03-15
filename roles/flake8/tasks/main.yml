@@ -1,0 +1,16 @@
+- name: Install flake8
+  apt:
+    name: "flake8"
+    state: present
+  become: yes
+
+- name: Directory ~/.config
+  file:
+    path: "{{ home }}/.config"
+    state: directory
+
+- name: Link ~/.config/flake8
+  file:
+    src: "{{ dotfiles }}/roles/flake8/files/flake8"
+    dest: "{{ home }}/.config/flake8"
+    state: link

@@ -1,6 +1,0 @@
-#!/bin/sh
-
-ls ~/.config/i3/shortcuts \
-  | dmenu -nb '#f9f9f9' -nf '#595959' -sb '#e89393' -sf '#f9f9f9' \
-  | sed "s#^#~/.config/i3/shortcuts/#" \
-  | sh &

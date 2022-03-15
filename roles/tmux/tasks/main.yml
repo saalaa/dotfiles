@@ -1,0 +1,23 @@
+- name: Install tmux
+  apt:
+    name: "tmux"
+    state: present
+  become: yes
+
+- name: Link ~/.tmux.conf
+  file:
+    src: "{{ dotfiles }}/roles/tmux/files/tmux.conf"
+    dest: "{{ home }}/.tmux.conf"
+    state: link
+
+- name: Link ~/.tmux-ancient.conf
+  file:
+    src: "{{ dotfiles }}/roles/tmux/files/tmux-ancient.conf"
+    dest: "{{ home }}/.tmux-ancient.conf"
+    state: link
+
+- name: Link ~/.tmux-paramount.conf
+  file:
+    src: "{{ dotfiles }}/roles/tmux/files/tmux-paramount.conf"
+    dest: "{{ home }}/.tmux-paramount.conf"
+    state: link

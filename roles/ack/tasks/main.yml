@@ -1,0 +1,11 @@
+- name: Install ack
+  apt:
+    name: "ack"
+    state: present
+  become: yes
+
+- name: Link ~/.ackrc
+  file:
+    src: "{{ dotfiles }}/roles/ack/files/ackrc"
+    dest: "{{ home }}/.ackrc"
+    state: link

@@ -1,0 +1,23 @@
+- name: Enpass repository
+  copy:
+    src: "{{ dotfiles }}/roles/enpass/files/enpass.list"
+    dest: /etc/apt/sources.list.d/enpass.list
+  become: yes
+
+- name: Enpass key
+  uri:
+    url: https://apt.enpass.io/keys/enpass-linux.key
+    dest: /etc/apt/trusted.gpg.d/enpass.asc
+    status_code: [200, 304]
+  become: yes
+
+- name: Update cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install enpass
+  apt:
+    name: "enpass"
+    state: present
+  become: yes

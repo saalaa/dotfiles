@@ -1,0 +1,13 @@
+- name: Install snaps
+  community.general.snap:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  loop: "{{ snaps.present }}"
+
+- name: Uninstall snaps
+  community.general.snap:
+    name: "{{ item }}"
+    state: absent
+  become: yes
+  loop: "{{ snaps.absent }}"

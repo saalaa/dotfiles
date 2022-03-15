@@ -1,5 +1,0 @@
-#!/bin/sh
-
-dmenu_path \
-  | dmenu -nb '#f9f9f9' -nf '#595959' -sb '#e89393' -sf '#f9f9f9' \
-  | sh &
