@@ -118,7 +118,7 @@ function set_title {
 }
 
 function set_prompt() {
-  export PS1="$(prompt_cwd)$(prompt_git)$(prompt_env)$(prompt_caret)"
+  export PS1="%m $(prompt_cwd)$(prompt_git)$(prompt_env)$(prompt_caret)"
 }
 
 precmd() {
@@ -136,3 +136,5 @@ export PATH=~/bin:$PATH
 
 export EDITOR='vim'
 export PAGER='less'
+
+. $HOME/.asdf/asdf.sh
