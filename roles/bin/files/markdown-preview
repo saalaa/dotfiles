@@ -1,0 +1,285 @@
+#!/usr/bin/env python3
+
+import codecs
+import os
+from http import HTTPStatus
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+from markdown import markdown
+
+BASE_DOCUMENT = """
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>www.py</title>
+<style type="text/css">
+body{
+    margin: 0 auto;
+    font-family: Georgia, Palatino, serif;
+    color: #444444;
+    line-height: 1;
+    max-width: 960px;
+    padding: 30px;
+}
+h1, h2, h3, h4 {
+    color: #111111;
+    font-weight: 400;
+}
+h1, h2, h3, h4, h5, p {
+    margin-bottom: 24px;
+    padding: 0;
+}
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 36px;
+    margin: 24px 0 6px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 21px;
+}
+h5 {
+    font-size: 18px;
+}
+a {
+    color: #0099ff;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+a:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+a:visited {
+    color: purple;
+}
+ul, ol {
+    padding: 0;
+    margin: 0;
+    margin-left:3em;
+}
+li {
+    line-height: 24px;
+}
+li ul, li ul {
+    margin-left: 24px;
+}
+p, ul, ol {
+    font-size: 16px;
+    line-height: 24px;
+}
+pre {
+    padding: 0px 24px;
+    max-width: 800px;
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+    font-size: 0.8em;
+}
+aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+blockquote {
+border-left:.5em solid #eee;
+padding-left: 2em;
+margin-left:0;
+}
+blockquote  cite {
+font-size:14px;
+line-height:20px;
+color:#bfbfbf;
+}
+blockquote cite:before {
+content: 'xxxxxxxxxx';
+}
+blockquote p {  
+color: #666;
+}
+hr {
+width: 540px;
+text-align: left;
+margin: 0 auto 0 0;
+color: #999;
+}
+.menu {
+text-align: right;
+}
+img {
+max-width: 90%;
+margin-left: auto;
+margin-right: auto;
+display: block;
+}
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 30px 30px 30px 15px;
+}
+thead, tbody, tr, td, th {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: rgba(0, 0, 0, 0);
+}
+th {
+    font-weight: normal;
+    font-size: 14px;
+    border-bottom: 2px solid #666;
+    border-right: 30px solid white;
+    border-left: 30px solid white;
+    padding: 8px 2px;
+}
+td {
+    border-right: 30px solid white;
+    border-left: 30px solid white;
+    padding: 12px 2px 0;
+}
+.menu a {
+background-color: rgb(85, 85, 85);
+border: 0;
+color: rgb(255, 255, 255);
+font-size: 11px;
+font-style: normal;
+font-variant: normal;
+font-family: sans-serif;
+font-weight: normal;
+line-height: 13px;
+height: 13px;
+margin: 0;
+min-width: 42px;
+padding: 10px 4px;
+text-align: center;
+text-decoration: none;
+vertical-align: baseline;
+display: inline-block;
+}
+.menu a:hover {
+background-color: rgb(15, 15, 15);
+}
+/*.code .codehilite .hll { background-color: #ffffcc }*/
+/*.code .codehilite { background: #f0f0f0; }*/
+.linenos { color: #666; }
+.code .codehilite .c { color: #60a0b0; font-style: italic } /* Comment */
+.code .codehilite .err { border: 1px solid #FF0000 } /* Error */
+.code .codehilite .k { color: #007020; font-weight: bold } /* Keyword */
+.code .codehilite .o { color: #666666 } /* Operator */
+.code .codehilite .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.code .codehilite .cp { color: #007020 } /* Comment.Preproc */
+.code .codehilite .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.code .codehilite .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.code .codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.code .codehilite .ge { font-style: italic } /* Generic.Emph */
+.code .codehilite .gr { color: #FF0000 } /* Generic.Error */
+.code .codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.code .codehilite .gi { color: #00A000 } /* Generic.Inserted */
+.code .codehilite .go { color: #808080 } /* Generic.Output */
+.code .codehilite .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.code .codehilite .gs { font-weight: bold } /* Generic.Strong */
+.code .codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.code .codehilite .gt { color: #0040D0 } /* Generic.Traceback */
+.code .codehilite .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.code .codehilite .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.code .codehilite .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.code .codehilite .kp { color: #007020 } /* Keyword.Pseudo */
+.code .codehilite .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.code .codehilite .kt { color: #902000 } /* Keyword.Type */
+.code .codehilite .m { color: #40a070 } /* Literal.Number */
+.code .codehilite .s { color: #4070a0 } /* Literal.String */
+.code .codehilite .na { color: #4070a0 } /* Name.Attribute */
+.code .codehilite .nb { color: #007020 } /* Name.Builtin */
+.code .codehilite .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.code .codehilite .no { color: #60add5 } /* Name.Constant */
+.code .codehilite .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.code .codehilite .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.code .codehilite .ne { color: #007020 } /* Name.Exception */
+.code .codehilite .nf { color: #06287e } /* Name.Function */
+.code .codehilite .nl { color: #002070; font-weight: bold } /* Name.Label */
+.code .codehilite .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.code .codehilite .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.code .codehilite .nv { color: #bb60d5 } /* Name.Variable */
+.code .codehilite .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.code .codehilite .w { color: #bbbbbb } /* Text.Whitespace */
+.code .codehilite .mf { color: #40a070 } /* Literal.Number.Float */
+.code .codehilite .mh { color: #40a070 } /* Literal.Number.Hex */
+.code .codehilite .mi { color: #40a070 } /* Literal.Number.Integer */
+.code .codehilite .mo { color: #40a070 } /* Literal.Number.Oct */
+.code .codehilite .sb { color: #4070a0 } /* Literal.String.Backtick */
+.code .codehilite .sc { color: #4070a0 } /* Literal.String.Char */
+.code .codehilite .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.code .codehilite .s2 { color: #4070a0 } /* Literal.String.Double */
+.code .codehilite .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.code .codehilite .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.code .codehilite .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.code .codehilite .sx { color: #c65d09 } /* Literal.String.Other */
+.code .codehilite .sr { color: #235388 } /* Literal.String.Regex */
+.code .codehilite .s1 { color: #4070a0 } /* Literal.String.Single */
+.code .codehilite .ss { color: #517918 } /* Literal.String.Symbol */
+.code .codehilite .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.code .codehilite .vc { color: #bb60d5 } /* Name.Variable.Class */
+.code .codehilite .vg { color: #bb60d5 } /* Name.Variable.Global */
+.code .codehilite .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.code .codehilite .il { color: #40a070 } /* Literal.Number.Integer.Long */
+</style>
+</head>
+<body>
+<div class="menu">
+<a href="/">Root</a>
+<a href="..">Parent</a>
+<a href=".">Index</a>
+</div>
+"""
+
+
+class MarkdownRequestHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        SimpleHTTPRequestHandler.__init__(self, *args, **kwargs)
+
+        self.extensions_map.update({".md": "text/html"})
+
+    def do_GET(self):
+        raw_md = ""
+
+        if self.path.endswith("/"):
+            path = os.path.join(self.path, "README.md")
+
+            self.send_response(HTTPStatus.FOUND)
+            self.send_header("Location", path)
+            self.end_headers()
+        elif self.path.endswith(".md"):
+            path = self.translate_path(self.path)
+            raw_md = codecs.open(path, mode="r", encoding="utf-8").read()
+
+            document = BASE_DOCUMENT + markdown(
+                raw_md, extensions=["toc", "tables", "codehilite", "abbr", "footnotes"]
+            )
+
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+
+            self.wfile.write(document.encode("utf8"))
+        else:
+            return super().do_GET()
+
+
+if __name__ == "__main__":
+    endpoint = ("0.0.0.0", 8181)
+
+    print("Starting documentation server on", endpoint)
+
+    server = HTTPServer(endpoint, MarkdownRequestHandler)
+    server.serve_forever()

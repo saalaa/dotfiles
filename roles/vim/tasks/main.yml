@@ -16,10 +16,11 @@
     dest: "{{ home }}/.gvimrc"
     state: link
 
-- name: Directory ~/.vim/autoload
+- name: Link ~/.vim
   file:
-    path: "{{ home }}/.vim/autoload"
-    state: directory
+    src: "{{ dotfiles }}/roles/vim/files/vim"
+    dest: "{{ home }}/.vim"
+    state: link
 
 - name: Download plug.vim
   uri:

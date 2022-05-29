@@ -11,10 +11,11 @@
     append: yes
   become: yes
 
-- name: Download kubectl
+
+- name: Download argocd
   uri:
-    url: "https://storage.googleapis.com/kubernetes-release/release/{{ versions.kubectl }}/bin/linux/amd64/kubectl"
-    dest: "{{ home }}/bin/kubectl"
+    url: "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+    dest: "{{ home }}/bin/argocd"
     status_code: [200, 304]
     mode: '755'
 
@@ -22,6 +23,13 @@
   uri:
     url: "https://github.com/docker/compose/releases/download/{{ versions.compose }}/docker-compose-linux-x86_64"
     dest: "{{ home }}/bin/docker-compose"
+    status_code: [200, 304]
+    mode: '755'
+
+- name: Download kubectl
+  uri:
+    url: "https://storage.googleapis.com/kubernetes-release/release/{{ versions.kubectl }}/bin/linux/amd64/kubectl"
+    dest: "{{ home }}/bin/kubectl"
     status_code: [200, 304]
     mode: '755'
 

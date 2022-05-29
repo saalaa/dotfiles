@@ -1,11 +1,15 @@
 call plug#begin()
 
 Plug 'saalaa/WoodenView.vim'
+" Plug 'saalaa/ancient-colors.vim'
+
+Plug '~/Projects/ancient-colors.vim'
+
+Plug 'owickstrom/vim-colors-paramount'
 
 " Advanced vim features
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'jkramer/vim-checkbox'
@@ -13,9 +17,9 @@ Plug 'jkramer/vim-checkbox'
 Plug 'scrooloose/nerdtree',     { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree',         { 'on': 'UndotreeToggle' }
 
+Plug 'dense-analysis/ale'
+
 " Languages support
-Plug 'ambv/black'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'arrufat/vala.vim'
 Plug 'digitaltoad/vim-jade'
@@ -27,13 +31,8 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'sophacles/vim-bundle-mako'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'hylang/vim-hy'
 Plug 'udalov/kotlin-vim'
-
-" Color schemes (vimcolors.com)
-Plug 'owickstrom/vim-colors-paramount'
-Plug 'saalaa/ancient-colors.vim'
 
 call plug#end()
 
@@ -48,8 +47,8 @@ syntax on
 " colorscheme paramount
 
 " Set colorscheme
-set background=dark
-colorscheme industry
+set background=light
+colorscheme ancient
 
 let mapleader = "\<Space>"
 
@@ -103,13 +102,6 @@ nmap n nzzzv
 nmap N Nzzzv
 
 
-" Pre-defined syntastic checkers
-" ------------------------------
-
-let g:syntastic_python_checkers = ['python', 'flake8']
-let g:syntastic_javascript_checkers = ['jshint']
-
-
 " Settings for WoodenView.vim
 " ---------------------------
 
@@ -142,13 +134,11 @@ let g:ctrlp_abbrev = {
 \ }
 
 
-" NerdTree key binding
-" --------------------
+" Sidebars
+" --------
 
+nmap <F8> :<C-u>UndotreeToggle<cr>
 nmap <F9> :<C-u>NERDTreeToggle<cr>
-
-
-let g:black_linelength = '79'
 
 
 " Tabs, trailing spaces and long lines
@@ -163,12 +153,7 @@ au Syntax * syn match ErrorMsg /\s\+$/
 
 au BufEnter * syntax sync fromstart
 
-au BufRead /tmp/mutt-* setf mail
-au BufRead Vagrantfile setf ruby
-
 au BufEnter *.py nmap <silent> <leader>b o__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
 au BufEnter *.py nmap <silent> <leader>B O__import__('pdb').set_trace()  # XXX Breakpoint.<esc>
 
 au BufEnter *.go nmap <F5> :<C-u>GoBuild<cr>
-
-autocmd BufWritePre *.py execute ':Black'

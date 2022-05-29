@@ -11,7 +11,9 @@ packages:
     - build-essential
     - chromium-browser
     - curl
+    - dconf-editor
     - gnome-tweaks
+    - htop
     - jq
     - libbz2-dev
     - libffi-dev

@@ -1,3 +1,7 @@
+roles/bin/files/argocd
 roles/bin/files/docker-compose
 roles/bin/files/kubectl
 roles/bin/files/minikube
+roles/bin/files/ngrok
+
+roles/vim/files/vim/plugged

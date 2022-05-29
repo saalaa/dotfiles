@@ -1,0 +1,6 @@
+- name: Install spotify
+  community.general.snap:
+    name: "spotify"
+    state: present
+    classic: yes
+  become: yes

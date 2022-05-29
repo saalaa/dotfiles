@@ -1,6 +1,10 @@
 --sort-files
 --color
 
+--ignore-dir=.mypy_cache
+--ignore-dir=.pants.d
+--ignore-dir=.venv
+--ignore-dir=.env
 --ignore-dir=env
 --ignore-dir=build
 --ignore-dir=dist
